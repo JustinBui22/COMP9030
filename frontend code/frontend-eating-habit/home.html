@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Justin Bui">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="styles/style.css"> <!-- Link to your CSS file -->
+</head>
+
+
+
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <h1>EatingHabitPal</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="food-log-dashboard.html">Log Food</a></li>
+                <li><a href="add-exercise-dashboard.html">Exercise Library</a></li>
+                <li><a href="add-food-dashboard.html">Food Library</a></li>
+                <li><a href="#">Progress</a></li>
+                <li><a href="#">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Dashboard Content -->
+    <main class="dashboard">
+        <!-- Summary Section -->
+        <section class="summary">
+            <h2>Today's Summary</h2>
+            <div class="summary-cards">
+                <div class="card">
+                    <h3>Calories</h3>
+                    <p>1,200 / 2,000 kcal</p>
+                </div>
+                <div class="card">
+                    <h3>Steps</h3>
+                    <p>5,000 / 10,000</p>
+                </div>
+                <div class="card">
+                    <h3>Water Intake</h3>
+                    <p>4 / 8 cups</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Log Section -->
+        <section class="log">
+            <h2>Recent Logs</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Activity</th>
+                        <th>Calories</th>
+                        <th>Duration</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>07:00 AM</td>
+                        <td>Running</td>
+                        <td>300 kcal</td>
+                        <td>30 mins</td>
+                    </tr>
+                    <tr>
+                        <td>12:00 PM</td>
+                        <td>Lunch</td>
+                        <td>600 kcal</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>06:00 PM</td>
+                        <td>Cycling</td>
+                        <td>400 kcal</td>
+                        <td>45 mins</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <div class="back-to-dashboard-container">
+            <input type="submit" id="back-to-dashboard-button" value="Back to Main Dashboard">
+        </div>    
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 EatingHabitPal. All rights reserved.</p>
+    </footer>
+
+    <script src="scripts.js"></script> <!-- Link to your JavaScript file -->
+</body>
+</html>
