@@ -152,6 +152,8 @@ body, ul {
         .calo-info-row {
             td:nth-child(even) {
                 text-align: center;
+                width: 5px;
+                
             }
             td:nth-child(odd) {
                 border-bottom: none;
@@ -161,6 +163,7 @@ body, ul {
         .calo-info-even-row {
             td {
                 border-top: none;
+                width: 90%; 
             }
         }
 
