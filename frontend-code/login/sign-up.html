@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="styles/style.css" />
+		<script defer src="scripts/script.js"></script>
+		<title>Sign Up</title>
+	</head>
+	<body>
+		<div class="container">
+			<h1>Sign Up</h1>
+			<div class="form">
+				<div class="input-container">
+					<input
+						type="text"
+						id="signUpUsername"
+						placeholder="Username"
+					/>
+					<span id="signUpUsernameError" class="error"></span>
+				</div>
+				<div class="input-container">
+					<input
+						type="password"
+						id="signUpPassword"
+						placeholder="Password"
+					/>
+					<!-- No error span needed for password -->
+				</div>
+				<div class="input-container">
+					<input type="email" id="signUpEmail" placeholder="Email" />
+					<span id="signUpEmailError" class="error"></span>
+				</div>
+				<div class="checkbox">
+					<input type="checkbox" id="terms" />
+					<label for="terms">I agree to the terms & conditions</label>
+				</div>
+				<button id="signupButton" disabled>Sign up</button>
+				<p>
+					Already have an account?
+					<a href="login.html" class="signin-button">Sign in</a>
+				</p>
+			</div>
+		</div>
+	</body>
+</html>

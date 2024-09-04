@@ -1,0 +1,190 @@
+body {
+	font-family: Arial, sans-serif;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	margin: 0;
+	background-color: #f0f0f0;
+}
+
+.container {
+	width: 100%;
+	max-width: 400px;
+	background: white;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	border-radius: 8px;
+	text-align: center;
+}
+
+h1 {
+	margin-bottom: 20px;
+}
+
+p {
+	margin: 0px;
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	padding: 0px 20px 20px 20px;
+}
+
+.form-actions {
+	display: flex;
+	justify-content: space-between;
+}
+
+input[type='text'],
+input[type='password'],
+input[type='email'] {
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+}
+
+.checkbox {
+	display: flex;
+	align-items: center;
+}
+
+.checkbox input[type='checkbox'] {
+	margin-right: 10px;
+}
+
+button {
+	padding: 10px;
+	border: none;
+	border-radius: 4px;
+	color: white;
+	background-color: #333;
+	cursor: pointer;
+}
+
+button:disabled {
+	background-color: #ddd;
+	cursor: not-allowed;
+}
+
+button#continueButton {
+	background-color: #333;
+	color: white;
+	padding: 10px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.forgot-password-button,
+.signup-button,
+.signin-button {
+	font-weight: bold;
+	color: #333;
+	text-decoration: none;
+}
+
+.forgot-password-button:hover,
+.signup-button:hover,
+.signin-button:hover {
+	color: lightslategrey;
+}
+
+/* Container for input and error */
+.input-container {
+	position: relative;
+	margin-bottom: 15px;
+}
+
+input[type='text'],
+input[type='password'],
+input[type='email'] {
+	padding: 10px;
+	padding-right: 40px; /* Adjust as needed */
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	width: 100%;
+	box-sizing: border-box; /* Ensure total width includes padding and border */
+}
+
+.error {
+	position: absolute;
+	right: 10px; /* Adjust as needed */
+	top: 50%;
+	transform: translateY(-50%);
+	color: red;
+	font-size: 0.9em;
+	display: none; /* Hide by default */
+}
+
+/* Show error message only when there's text in it */
+.error.show {
+	display: block;
+}
+
+.error-message {
+	color: red;
+	font-size: 0.9em;
+	margin-top: 5px;
+	display: block;
+}
+
+/* Success message styles */
+.success-message {
+	width: 100%;
+	max-width: 500px;
+	margin: 0 auto;
+	border-radius: 10px;
+	overflow: hidden;
+}
+
+.success-top {
+	background-color: #333;
+	color: white;
+	text-align: center;
+	padding: 20px;
+}
+
+.checkmark {
+	font-size: 48px;
+	display: inline-block;
+	background-color: white;
+	color: #333;
+	border-radius: 50%;
+	padding: 10px 25px;
+	margin-bottom: 10px;
+}
+
+.success-top h1 {
+	margin: 0;
+}
+
+.success-bottom {
+	background-color: white;
+	color: #333;
+	text-align: center;
+	padding: 20px;
+}
+
+.success-bottom p {
+	margin: 0 0 20px 0;
+}
+
+.success-bottom button {
+	background-color: #333;
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	cursor: pointer;
+	font-size: 16px;
+	border-radius: 5px;
+}
+
+.password-reset-message {
+	padding: 0px 20px 20px 20px;
+}
+
+.password-reset-message p {
+	padding: 10px;
+}
