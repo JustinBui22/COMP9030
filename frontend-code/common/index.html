@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="common/styles/common.css">
+    <title>Unified Framework</title>
+</head>
+<body>
+    <div id="header">
+        <!-- Common header content -->
+        <h1>My Application Header</h1>
+    </div>
+
+    <div id="sidebar">
+        <!-- Sidebar content -->
+        <nav>
+            <ul>
+                <li><a href="../therapist-module/dashboard/dashboard.html" target="content-frame">Dashboard</a></li>
+                <li><a href="journal-entry.html" target="content-frame">Journal Entry</a></li>
+                <li><a href="eating-habit.html" target="content-frame">Eating Habit</a></li>
+                <li><a href="patient-management.html" target="content-frame">Patient Management</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div id="content">
+        <!-- The iframe where individual content pages will load -->
+        <iframe name="content-frame" width="100%" height="600px" frameborder="0"></iframe>
+    </div>
+
+    <div id="footer">
+        <!-- Common footer content -->
+        <p>My Application Footer</p>
+    </div>
+</body>
+</html>
