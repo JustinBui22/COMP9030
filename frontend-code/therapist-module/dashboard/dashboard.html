@@ -2,11 +2,56 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="../common/styles/common.css">
+    <title>Therapist Dashboard with Drag-and-Drop</title>
+    <link rel="stylesheet" href="styles/dashboard.css"> <!-- Link to external CSS -->
 </head>
 <body>
-    <h2>Welcome to the Dashboard</h2>
-    <p>This is where dashboard content goes.</p>
+
+    <h2>Therapist Dashboard with Drag-and-Drop</h2>
+
+    <!-- Group Filter Tabs (Droppable areas) -->
+    <div class="tab-menu">
+        <button class="tab" ondragover="allowDrop(event)" ondrop="dropOnTab(event, 'ALL')" draggable="false">ALL</button>
+        <button class="tab" ondragover="allowDrop(event)" ondrop="dropOnTab(event, 'Group 1')" draggable="false">Group 1</button>
+        <button class="tab" ondragover="allowDrop(event)" ondrop="dropOnTab(event, 'Group 2')" draggable="false">Group 2</button>
+        <button class="tab" ondragover="allowDrop(event)" ondrop="dropOnTab(event, 'Group 3')" draggable="false">Group 3</button>
+    </div>
+
+    <!-- Card Layout for Patients -->
+    <div class="card-container">
+        <!-- Card for Patient 1 -->
+        <div class="card" id="card1" draggable="true" ondragstart="drag(event)">
+            <img src="../../common/assets/images/patient_icon.png" alt="Patient Avatar">
+            <h3>John Doe</h3>
+            <p>Status: Active</p>
+            <p>Group: A</p>
+            <button>View Details</button>
+            <button>Add Note</button>
+        </div>
+
+        <!-- Card for Patient 2 -->
+        <div class="card" id="card2" draggable="true" ondragstart="drag(event)">
+            <img src="../../common/assets/images/patient_icon.png" alt="Patient Avatar">
+            <h3>Jane Smith</h3>
+            <p>Status: Inactive</p>
+            <p>Group: B</p>
+            <button>View Details</button>
+            <button>Add Note</button>
+        </div>
+
+        <!-- Card for Patient 3 -->
+        <div class="card" id="card3" draggable="true" ondragstart="drag(event)">
+            <img src="../../common/assets/images/patient_icon.png" alt="Patient Avatar">
+            <h3>Bob Brown</h3>
+            <p>Status: Active</p>
+            <p>Group: A</p>
+            <button>View Details</button>
+            <button>Add Note</button>
+        </div>
+
+        <!-- Add more patient cards as needed -->
+    </div>
+
+    <script src="scripts/dashboard.js"></script> <!-- Link to external JS -->
 </body>
 </html>
