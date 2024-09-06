@@ -39,10 +39,14 @@ p {
 
 input[type='text'],
 input[type='password'],
-input[type='email'] {
+input[type='email'],
+select {
 	padding: 10px;
+	padding-right: 40px; /* Adjust as needed */
 	border: 1px solid #ddd;
 	border-radius: 4px;
+	width: 100%;
+	box-sizing: border-box; /* Ensure total width includes padding and border */
 }
 
 .checkbox {

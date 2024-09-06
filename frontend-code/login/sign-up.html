@@ -31,8 +31,16 @@
 					<input type="email" id="signUpEmail" placeholder="Email" />
 					<span id="signUpEmailError" class="error"></span>
 				</div>
+				<div class="input-container">
+					<select id="signUpRoleSelect" aria-label="Role selection">
+						<option value="">Select your role</option>
+						<option value="therapist">Therapist</option>
+						<option value="patient">Patient</option>
+					</select>
+					<span id="signUpRoleError" class="error"></span>
+				</div>
 				<div class="checkbox">
-					<input type="checkbox" id="terms" />
+					<input type="checkbox" id="signUpTerms" />
 					<label for="terms">I agree to the terms & conditions</label>
 				</div>
 				<button id="signupButton" disabled>Sign up</button>

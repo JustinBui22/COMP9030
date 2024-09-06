@@ -7,10 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
 	const signUpUsernameInput = document.getElementById('signUpUsername');
 	const signUpPasswordInput = document.getElementById('signUpPassword');
 	const signUpEmailInput = document.getElementById('signUpEmail');
-	const termsCheckbox = document.getElementById('terms');
+	const signUpTermsCheckbox = document.getElementById('signUpTerms');
 	const signupButton = document.getElementById('signupButton');
 	const signUpUsernameError = document.getElementById('signUpUsernameError');
 	const signUpEmailError = document.getElementById('signUpEmailError');
+	const signUpRoleSelect = document.getElementById('signUpRoleSelect');
+	const signUpRoleError = document.getElementById('signUpRoleError');
 
 	const forgotPasswordUsernameInput = document.getElementById(
 		'forgotPasswordUsername'
@@ -54,21 +56,24 @@ document.addEventListener('DOMContentLoaded', () => {
 			!signUpUsernameInput ||
 			!signUpPasswordInput ||
 			!signUpEmailInput ||
-			!termsCheckbox ||
+			!signUpTermsCheckbox ||
 			!signupButton ||
 			!signUpUsernameError ||
-			!signUpEmailError
+			!signUpEmailError ||
+			!signUpRoleSelect ||
+			!signUpRoleError
 		)
 			return;
 
 		const isUsernameFilled = signUpUsernameInput.value.trim() !== '';
 		const isPasswordFilled = signUpPasswordInput.value.trim() !== '';
 		const isEmailFilled = signUpEmailInput.value.trim() !== '';
-		const isTermsChecked = termsCheckbox.checked;
+		const isTermsChecked = signUpTermsCheckbox.checked;
 		const isEmailValid = isValidEmail(signUpEmailInput.value);
 		const isUsernameValid = !localStorage.getItem(
 			signUpUsernameInput.value.trim()
 		);
+		const isRoleSelected = signUpRoleSelect.value !== '';
 
 		if (isUsernameFilled && !isUsernameValid) {
 			signUpUsernameError.textContent = 'username already exists';
@@ -86,13 +91,22 @@ document.addEventListener('DOMContentLoaded', () => {
 			signUpEmailError.classList.remove('show');
 		}
 
+		if (!isRoleSelected) {
+			signUpRoleError.textContent = 'Please select a role';
+			signUpRoleError.classList.add('show');
+		} else {
+			signUpRoleError.textContent = '';
+			signUpRoleError.classList.remove('show');
+		}
+
 		signupButton.disabled = !(
 			isUsernameFilled &&
 			isPasswordFilled &&
 			isEmailFilled &&
 			isEmailValid &&
 			isTermsChecked &&
-			isUsernameValid
+			isUsernameValid &&
+			isRoleSelected
 		);
 	};
 
@@ -125,8 +139,9 @@ document.addEventListener('DOMContentLoaded', () => {
 		const userData = JSON.parse(localStorage.getItem(username));
 
 		if (userData && userData.password === password) {
-			window.location.href =
-				'../common/index.html';
+			localStorage.setItem('userData', JSON.stringify(userData));
+
+			window.location.href = '../common/index.html';
 		} else {
 			loginError.textContent = 'Invalid username or password';
 			loginError.classList.add('show');
@@ -138,13 +153,15 @@ document.addEventListener('DOMContentLoaded', () => {
 			!signUpUsernameInput ||
 			!signUpPasswordInput ||
 			!signUpEmailInput ||
-			!signUpUsernameError
+			!signUpUsernameError ||
+			!signUpRoleSelect
 		)
 			return;
 
 		const username = signUpUsernameInput.value.trim();
 		const password = signUpPasswordInput.value.trim();
 		const email = signUpEmailInput.value.trim();
+		const role = signUpRoleSelect.value;
 
 		if (localStorage.getItem(username)) {
 			signUpUsernameError.textContent = 'username already exists';
@@ -152,7 +169,10 @@ document.addEventListener('DOMContentLoaded', () => {
 			return;
 		}
 
-		localStorage.setItem(username, JSON.stringify({ password, email }));
+		localStorage.setItem(
+			username,
+			JSON.stringify({ password, email, role })
+		);
 
 		window.location.href = 'sign-up-success.html';
 	};
@@ -213,8 +233,10 @@ document.addEventListener('DOMContentLoaded', () => {
 		signUpPasswordInput.addEventListener('input', checkFormValidity);
 	if (signUpEmailInput)
 		signUpEmailInput.addEventListener('input', checkFormValidity);
-	if (termsCheckbox)
-		termsCheckbox.addEventListener('change', checkFormValidity);
+	if (signUpTermsCheckbox)
+		signUpTermsCheckbox.addEventListener('change', checkFormValidity);
+	if (signUpRoleSelect)
+		signUpRoleSelect.addEventListener('change', checkFormValidity);
 	if (signupButton) signupButton.addEventListener('click', handleSignUp);
 
 	if (forgotPasswordUsernameInput)
