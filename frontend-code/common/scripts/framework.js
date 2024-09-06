@@ -24,9 +24,18 @@ function loadContentBasedOnRole() {
         // Load patient dashboard or appropriate content
         contentFrame.src = 'journal-entry.html';
     } else {
-        // Default message for unknown roles
-        navItems = `<li>No role assigned. Please contact support.</li>`;
-        contentFrame.src = '';
+        // // Default message for unknown roles
+        // navItems = `<li>No role assigned. Please contact support.</li>`;
+        // contentFrame.src = '';
+
+        // Therapist-specific links
+        navItems = `
+            <li><a href="../therapist-module/dashboard/dashboard.html" target="content-frame">Dashboard</a></li>
+            <li><a href="group-management.html" target="content-frame">Group Management</a></li>
+            <li><a href="patient-management.html" target="content-frame">Patient Management</a></li>
+        `;
+        // Load therapist dashboard by default
+        contentFrame.src = '../therapist-module/dashboard/dashboard.html';
     }
 
     // Insert navigation items into sidebar
