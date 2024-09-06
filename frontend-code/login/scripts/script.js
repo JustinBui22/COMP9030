@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		if (userData && userData.password === password) {
 			window.location.href =
-				'../therapist-module/dashboard/dashboard.html';
+				'../common/index.html';
 		} else {
 			loginError.textContent = 'Invalid username or password';
 			loginError.classList.add('show');

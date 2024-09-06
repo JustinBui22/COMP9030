@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/journalentry_style.css">
+    <title> Journal entry page </title>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header">
+        <!-- Placeholder for Logo -->
+        <div class="placeholder">L</div>
+
+        <!-- User avatar placeholder -->
+        <div class="user-profile">
+            <span class="user-name">Welcome, User</span>
+            <div class="placeholder">U</div>
+        </div>
+    </div>
+
+    <!-- Layout for sidebar and content -->
+    <div id="layout">
+        <!-- Sidebar -->
+        <div id="sidebar">
+            <nav>
+                <ul>
+                    <li><a href="dashboard.html" target="content-frame">Dashboard</a></li>
+                    <li><a href="journal-entry.html" target="content-frame">Journal Entry</a></li>
+                    <li><a href="eating-habit.html" target="content-frame">Eating Habit</a></li>
+                    <li><a href="patient-management.html" target="content-frame">Patient Management</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Content Area -->
+        <div id="content">
+            <div class="container">
+                <div class="calendar">
+                    <input type="date" id="datePicker">
+                    <p id="selectedDate">Today : </p>
+                </div>
+
+                <div>
+                    <h3>Write your Journal</h3>
+                    <textarea id="journalText" placeholder="Start writing your journal here..."></textarea>
+                </div>
+
+                <div>
+                    <h3>Mood tracker</h3>
+                    <div class="mood-tracker" id="moodTracker">
+                        <img src="https://img.icons8.com/emoji/48/smiling-face-with-smiling-eyes.png" alt="Happy" data-mood="Happy">
+                        <img src="https://img.icons8.com/emoji/48/slightly-frowning-face.png" alt="Sad" data-mood="Sad">
+                        <img src="https://img.icons8.com/emoji/48/neutral-face.png" alt="Neutral" data-mood="Neutral">
+                        <img src="https://img.icons8.com/emoji/48/angry-face.png" alt="Angry" data-mood="Angry">
+                        <img src="https://img.icons8.com/emoji/48/face-with-open-mouth.png" alt="Surprised" data-mood="Surprised">
+                    </div>
+                </div>
+
+                <div>
+                    <h3>Mood notes</h3>
+                    <textarea id="moodNotes" placeholder="Write about your mood..."></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="scripts/journalentry_script.js"></script>
+</body>
