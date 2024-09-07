@@ -10,8 +10,8 @@ function loadContentBasedOnRole() {
 		// Therapist-specific links
 		navItems = `
             <li><a href="../therapist-module/dashboard/dashboard.html" target="content-frame">Dashboard</a></li>
-            <li><a href="group-management.html" target="content-frame">Group Management</a></li>
-            <li><a href="patient-management.html" target="content-frame">Patient Management</a></li>
+            <li><a href="../therapist-module/patient-management/group-management.html" target="content-frame">Group Management</a></li>
+            <li><a href="../therapist-module/patient-management/patient-list.html" target="content-frame">Patient Management</a></li>
         `;
 		// Load therapist dashboard by default
 		contentFrame.src = '../therapist-module/dashboard/dashboard.html';
@@ -31,8 +31,8 @@ function loadContentBasedOnRole() {
 		// Therapist-specific links
 		navItems = `
             <li><a href="../therapist-module/dashboard/dashboard.html" target="content-frame">Dashboard</a></li>
-            <li><a href="group-management.html" target="content-frame">Group Management</a></li>
-            <li><a href="patient-management.html" target="content-frame">Patient Management</a></li>
+            <li><a href="../therapist-module/patient-management/group-management.html" target="content-frame">Group Management</a></li>
+            <li><a href="../therapist-module/patient-management/patient-list.html" target="content-frame">Patient Management</a></li>
         `;
 		// Load therapist dashboard by default
 		contentFrame.src = '../therapist-module/dashboard/dashboard.html';

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/patient-list.css">
+    <title>Patient List</title>
+</head>
+<body>
+
+    <h2>Patient List</h2>
+
+    <!-- Filter and Sort Options -->
+    <div class="controls">
+        <label for="group-filter">Group:</label>
+        <select id="group-filter" onchange="filterPatients()">
+            <option value="all">All Groups</option>
+            <option value="group_a">Group A</option>
+            <option value="group_b">Group B</option>
+            <!-- Add more group options if needed -->
+        </select>
+
+        <label for="sort-options">Sort By:</label>
+        <select id="sort-options" onchange="sortPatients()">
+            <option value="name">Name</option>
+            <option value="status">Status</option>
+            <option value="group">Group</option>
+        </select>
+
+        <button onclick="addPatient()">Add Patient</button>
+        <button onclick="exportPatients()">Export List</button>
+    </div>
+
+    <!-- Patient Table -->
+    <table id="patient-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Group</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="patient-tbody">
+            <!-- Patient rows will be populated here dynamically -->
+        </tbody>
+    </table>
+
+    <script src="scripts/patient-list.js"></script>
+</body>
+</html>

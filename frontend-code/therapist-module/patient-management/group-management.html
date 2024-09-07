@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/group-management.css">
+    <title>Group Management</title>
+</head>
+<body>
+    <h2>Group Management</h2>
+
+    <!-- Group Cards Container -->
+    <div class="group-container">
+        <!-- Group Card 1 -->
+        <div class="group-card">
+            <div class="group-header">
+                <img src="../../common/assets/images/group_icon.png" alt="Group Thumbnail" class="group-thumb">
+                <div>
+                    <h3>Group A</h3>
+                    <a href="patient-list.html?group=group_a">Members: <span>15</span></a>
+                </div>
+            </div>
+            <div class="group-body">
+                <p><strong>Description:</strong> This group focuses on rehabilitation and therapy.</p>
+                <p><strong>Status:</strong> Active</p>
+                <p><strong>Upcoming Schedule:</strong> Meeting on 12th Aug, Therapy session on 15th Aug.</p>
+            </div>
+            <div class="group-footer">
+                <button onclick="viewDetails('group_a')">View Details</button>
+                <button onclick="addMember('group_a')">Add Member</button>
+                <button onclick="editGroup('group_a')">Edit Info</button>
+                <button onclick="scheduleEvent('group_a')">Schedule Event</button>
+            </div>
+        </div>
+
+        <!-- Group Card 2 -->
+        <div class="group-card">
+            <div class="group-header">
+                <img src="../../common/assets/images/group_icon.png" alt="Group Thumbnail" class="group-thumb">
+                <div>
+                    <h3>Group B</h3>
+                    <a href="patient-list.html?group=group_b">Members: <span>12</span></a>
+                </div>
+            </div>
+            <div class="group-body">
+                <p><strong>Description:</strong> This group focuses on mental health improvement.</p>
+                <p><strong>Status:</strong> Active</p>
+                <p><strong>Upcoming Schedule:</strong> Mindfulness session on 10th Aug, Checkup on 17th Aug.</p>
+            </div>
+            <div class="group-footer">
+                <button onclick="viewDetails('group_b')">View Details</button>
+                <button onclick="addMember('group_b')">Add Member</button>
+                <button onclick="editGroup('group_b')">Edit Info</button>
+                <button onclick="scheduleEvent('group_b')">Schedule Event</button>
+            </div>
+        </div>
+
+        <!-- Add more group cards as needed -->
+    </div>
+
+    <script src="scripts/group-management.js"></script>
+</body>
+</html>
