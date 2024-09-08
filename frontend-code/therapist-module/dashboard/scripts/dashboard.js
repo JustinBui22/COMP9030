@@ -17,3 +17,8 @@ function dropOnTab(event, groupName) {
     // Show an alert when a card is dropped on a group tab
     alert(`${cardElement.querySelector('h3').innerText} has been assigned to ${groupName}`);
 }
+// Function to handle "View Details" button click
+function viewDetails(patientId) {
+    // Redirect to the patient details page with the patient ID as a URL query parameter
+    window.location.href = `../patient-management/patient-details.html?id=${encodeURIComponent(patientId)}`;
+}

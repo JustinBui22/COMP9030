@@ -20,32 +20,32 @@
     <!-- Card Layout for Patients -->
     <div class="card-container">
         <!-- Card for Patient 1 -->
-        <div class="card" id="card1" draggable="true" ondragstart="drag(event)">
+        <div class="card" id="card1" data-patient-id="101" draggable="true" ondragstart="drag(event)">
             <img src="../../common/assets/images/patient_icon.png" alt="Patient Avatar">
             <h3>John Doe</h3>
             <p>Status: Active</p>
             <p>Group: A</p>
-            <button>View Details</button>
+            <button onclick="viewDetails('101')">View Details</button>
             <button>Add Note</button>
         </div>
 
         <!-- Card for Patient 2 -->
-        <div class="card" id="card2" draggable="true" ondragstart="drag(event)">
+        <div class="card" id="card2" data-patient-id="102" draggable="true" ondragstart="drag(event)">
             <img src="../../common/assets/images/patient_icon.png" alt="Patient Avatar">
             <h3>Jane Smith</h3>
             <p>Status: Inactive</p>
             <p>Group: B</p>
-            <button>View Details</button>
+            <button onclick="viewDetails('102')">View Details</button>
             <button>Add Note</button>
         </div>
 
         <!-- Card for Patient 3 -->
-        <div class="card" id="card3" draggable="true" ondragstart="drag(event)">
+        <div class="card" id="card3" data-patient-id="103" draggable="true" ondragstart="drag(event)">
             <img src="../../common/assets/images/patient_icon.png" alt="Patient Avatar">
             <h3>Bob Brown</h3>
             <p>Status: Active</p>
             <p>Group: A</p>
-            <button>View Details</button>
+            <button onclick="viewDetails('103')">View Details</button>
             <button>Add Note</button>
         </div>
 

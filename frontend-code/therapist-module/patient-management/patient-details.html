@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Details</title>
+    <link rel="stylesheet" href="styles/patient-details.css">
+</head>
+<body>
+    <!-- Patient Info Section -->
+    <section id="patient-info">
+        <div class="column avatar-name">
+            <img src="../../common/assets/images/patient_icon.png" alt="Patient Avatar" class="avatar">
+            <h2>John Doe</h2>
+        </div>
+        <div class="column patient-details">
+            <p><strong>Gender:</strong> Male</p>
+            <p><strong>Age:</strong> 32</p>
+            <p><strong>Height:</strong> 180 cm</p>
+            <p><strong>Weight:</strong> 75 kg</p>
+        </div>
+        <div class="column action-buttons">
+            <button onclick="editPatient()">Edit</button>
+            <button onclick="changeGroup()">Change Group</button>
+            <button onclick="setGoal()">Set Goal</button>
+            <button onclick="addNote()">Add Note</button>
+        </div>
+    </section>
+
+    <!-- Patient Records Section -->
+    <section id="patient-records">
+        <h3 class="section-title">Detailed Record</h3>
+        <hr>
+        <div class="tabs">
+            <button class="tablink" onclick="openTab(event, 'emotional-records')" id="defaultOpen">Emotional Records</button>
+            <button class="tablink" onclick="openTab(event, 'sleep-records')">Sleep Records</button>
+            <button class="tablink" onclick="openTab(event, 'exercise-records')">Exercise Records</button>
+        </div>
+
+        <div id="emotional-records" class="tabcontent">
+            <h3>Emotional Records</h3>
+            <p>Record 1: Feeling anxious on 15th Aug.</p>
+            <p>Record 2: Feeling relaxed on 17th Aug.</p>
+        </div>
+
+        <div id="sleep-records" class="tabcontent">
+            <h3>Sleep Records</h3>
+            <p>Record 1: 6 hours of sleep on 14th Aug.</p>
+            <p>Record 2: 8 hours of sleep on 16th Aug.</p>
+        </div>
+
+        <div id="exercise-records" class="tabcontent">
+            <h3>Exercise Records</h3>
+            <p>Record 1: 30 mins running on 12th Aug.</p>
+            <p>Record 2: 1-hour yoga on 15th Aug.</p>
+        </div>
+    </section>
+
+    <!-- Therapist Notes Section -->
+    <section id="therapist-notes">
+        <h3 class="section-title">Therapist Notes</h3>
+        <hr>
+        <div class="note-card sticky-note">
+            <h4>Note 1</h4>
+            <p class="note-content">Observed improvement in anxiety levels. Recommend continuing therapy sessions twice a week. <span class="more">...more</span></p>
+        </div>
+        <div class="note-card sticky-note">
+            <h4>Note 2</h4>
+            <p class="note-content">Patient responded well to mindfulness exercises, showing positive attitude after sessions. <span class="more">...more</span></p>
+        </div>
+        <div class="note-card sticky-note">
+            <h4>Note 3</h4>
+            <p class="note-content">Discussed treatment plan with the patient, agreed on following a structured regimen.</p>
+        </div>
+        <div class="note-card sticky-note">
+            <h4>Note 4</h4>
+            <p class="note-content">Follow-up session is required to evaluate mental health status after recent life changes.</p>
+        </div>
+    </section>
+
+    <script src="scripts/patient-details.js"></script>
+</body>
+</html>

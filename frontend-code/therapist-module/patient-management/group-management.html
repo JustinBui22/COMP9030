@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +17,7 @@
                 <img src="../../common/assets/images/group_icon.png" alt="Group Thumbnail" class="group-thumb">
                 <div>
                     <h3>Group A</h3>
-                    <a href="patient-list.html?group=group_a">Members: <span>15</span></a>
+                    <a href="patient-list.html?from=group-management&group=group_a">Members: <span>15</span></a>
                 </div>
             </div>
             <div class="group-body">
@@ -27,20 +26,20 @@
                 <p><strong>Upcoming Schedule:</strong> Meeting on 12th Aug, Therapy session on 15th Aug.</p>
             </div>
             <div class="group-footer">
-                <button onclick="viewDetails('group_a')">View Details</button>
-                <button onclick="addMember('group_a')">Add Member</button>
-                <button onclick="editGroup('group_a')">Edit Info</button>
-                <button onclick="scheduleEvent('group_a')">Schedule Event</button>
+                <button onclick="openModal('view-info-modal', true)">View Details</button>
+                <button onclick="openModal('add-member-modal')">Add Member</button>
+                <button onclick="openModal('edit-info-modal', false)">Edit Info</button>
+                <button onclick="window.location.href='schedule-page.html'">Schedule Event</button>
             </div>
         </div>
 
-        <!-- Group Card 2 -->
+        <!-- Group Card 2 (additional example) -->
         <div class="group-card">
             <div class="group-header">
                 <img src="../../common/assets/images/group_icon.png" alt="Group Thumbnail" class="group-thumb">
                 <div>
                     <h3>Group B</h3>
-                    <a href="patient-list.html?group=group_b">Members: <span>12</span></a>
+                    <a href="patient-list.html?from=group-management&group=group_b">Members: <span>12</span></a>
                 </div>
             </div>
             <div class="group-body">
@@ -49,14 +48,56 @@
                 <p><strong>Upcoming Schedule:</strong> Mindfulness session on 10th Aug, Checkup on 17th Aug.</p>
             </div>
             <div class="group-footer">
-                <button onclick="viewDetails('group_b')">View Details</button>
-                <button onclick="addMember('group_b')">Add Member</button>
-                <button onclick="editGroup('group_b')">Edit Info</button>
-                <button onclick="scheduleEvent('group_b')">Schedule Event</button>
+                <button onclick="openModal('view-info-modal', true)">View Details</button>
+                <button onclick="openModal('add-member-modal')">Add Member</button>
+                <button onclick="openModal('edit-info-modal', false)">Edit Info</button>
+                <button onclick="window.location.href='schedule-page.html'">Schedule Event</button>
             </div>
         </div>
+    </div>
 
-        <!-- Add more group cards as needed -->
+    <!-- Add Member Modal -->
+    <div id="add-member-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('add-member-modal')">&times;</span>
+            <h3>Add Member</h3>
+            <label for="member-select">Select a patient:</label>
+            <select id="member-select">
+                <option value="John Doe">John Doe</option>
+                <option value="Jane Smith">Jane Smith</option>
+                <option value="Alice Johnson">Alice Johnson</option>
+            </select>
+            <button onclick="addMember()">Add</button>
+        </div>
+    </div>
+
+    <!-- Edit Info Modal -->
+    <div id="edit-info-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('edit-info-modal')">&times;</span>
+            <h3>Edit Group Information</h3>
+            <form>
+                <label for="group-name">Group Name:</label>
+                <input type="text" id="group-name" value="Group A">
+                <label for="group-desc">Group Description:</label>
+                <textarea id="group-desc">This group focuses on rehabilitation and therapy.</textarea>
+                <button type="submit" onclick="saveGroupInfo()">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- View Info Modal (non-editable, same as edit but without saving) -->
+    <div id="view-info-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('view-info-modal')">&times;</span>
+            <h3>Group Information</h3>
+            <form>
+                <label for="group-name-view">Group Name:</label>
+                <input type="text" id="group-name-view" value="Group A" disabled>
+                <label for="group-desc-view">Group Description:</label>
+                <textarea id="group-desc-view" disabled>This group focuses on rehabilitation and therapy.</textarea>
+            </form>
+        </div>
     </div>
 
     <script src="scripts/group-management.js"></script>

@@ -10,6 +10,13 @@ const patients = [
 window.onload = function () {
     const urlParams = new URLSearchParams(window.location.search);
     const groupFilter = urlParams.get('group') || 'all';
+    const fromGroupManagement = urlParams.get('from') === 'group-management'; // Check if accessed from Group Management
+
+    // Display return buttons if from Group Management page
+    if (fromGroupManagement) {
+        document.getElementById('return-button').style.display = 'inline-block';
+    }
+
     document.getElementById('group-filter').value = groupFilter;
     loadPatients(groupFilter);
 };
@@ -69,9 +76,14 @@ function exportPatients() {
 
 // Placeholder functions for patient actions
 function viewPatient(name) {
-    alert('Viewing patient: ' + name);
+    window.location.href = `../patient-management/patient-details.html?id=${encodeURIComponent(name)}`;
 }
 
 function editPatient(name) {
     alert('Editing patient: ' + name);
+}
+
+// Return to the Group Management page
+function goBack() {
+    window.history.back(); // Go back to the previous page
 }

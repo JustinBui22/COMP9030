@@ -1,23 +1,29 @@
-// Function to view group details
-function viewDetails(groupId) {
-    alert('Viewing details for ' + groupId);
-    // Logic for viewing group details, e.g., load new page or show modal
+// Open modal function
+function openModal(modalId, isViewOnly = false) {
+    if (isViewOnly) {
+        // View Details: Populate modal with read-only values
+        document.getElementById('group-name-view').value = "Group A"; // Example group name
+        document.getElementById('group-desc-view').value = "This group focuses on rehabilitation and therapy.";
+    }
+    document.getElementById(modalId).style.display = 'block';
 }
 
-// Function to add a member to the group
-function addMember(groupId) {
-    alert('Adding member to ' + groupId);
-    // Logic for adding a new member, e.g., open a form/modal
+// Close modal function
+function closeModal(modalId) {
+    document.getElementById(modalId).style.display = 'none';
 }
 
-// Function to edit group information
-function editGroup(groupId) {
-    alert('Editing information for ' + groupId);
-    // Logic for editing group info, e.g., load new form or modal
+// Add member function (to be extended)
+function addMember() {
+    const selectedMember = document.getElementById('member-select').value;
+    alert(`Added ${selectedMember} to the group!`);
+    closeModal('add-member-modal');
 }
 
-// Function to schedule an event for the group
-function scheduleEvent(groupId) {
-    alert('Scheduling event for ' + groupId);
-    // Logic for scheduling event, e.g., open a scheduling form/modal
+// Save group info (to be extended)
+function saveGroupInfo() {
+    const groupName = document.getElementById('group-name').value;
+    const groupDesc = document.getElementById('group-desc').value;
+    alert(`Group info saved: ${groupName} - ${groupDesc}`);
+    closeModal('edit-info-modal');
 }
