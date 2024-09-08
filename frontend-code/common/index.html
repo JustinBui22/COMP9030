@@ -21,21 +21,23 @@
     </div>
 
     <!-- Layout for sidebar and content -->
-    <div id="layout">
-        <!-- Sidebar (to be populated based on role) -->
-        <div id="sidebar">
-            <nav>
-                <ul id="nav-list">
-                    <!-- Items will be dynamically populated based on role -->
-                </ul>
-            </nav>
-        </div>
-
-        <!-- Content Area with Iframe -->
-        <div id="content">
-            <iframe id="content-frame" name="content-frame"></iframe>
-        </div>
+<div id="layout">
+    <!-- Sidebar (with collapse/expand button inside) -->
+    <div id="sidebar">
+        <!-- Collapsible Sidebar Button at the right top corner -->
+        <button id="collapse-button" onclick="toggleSidebar()">☰</button>
+        <nav>
+            <ul id="nav-list">
+                <!-- Links will be dynamically populated based on role -->
+            </ul>
+        </nav>
     </div>
+
+    <!-- Content Area with Iframe -->
+    <div id="content">
+        <iframe id="content-frame" name="content-frame"></iframe>
+    </div>
+</div>
 
     <script src="scripts/framework.js"></script> <!-- Link to external JS -->
 </body>

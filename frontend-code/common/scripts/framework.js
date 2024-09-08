@@ -1,52 +1,59 @@
 // Function to check the role from localStorage and load appropriate sidebar and content
 function loadContentBasedOnRole() {
-	const { role } = JSON.parse(localStorage.getItem('userData')); // Get userData from localStorage
-	const contentFrame = document.getElementById('content-frame');
-	const navList = document.getElementById('nav-list');
+    const userData = JSON.parse(localStorage.getItem('userData')); // Get userData from localStorage
+    const { role, username } = userData || {}; // Destructure role and username from userData
+    const contentFrame = document.getElementById('content-frame');
+    const navList = document.getElementById('nav-list');
 
-	let navItems = '';
+    let navItems = '';
 
-	if (role === 'therapist') {
-		// Therapist-specific links
-		navItems = `
-            <li><a href="../therapist-module/dashboard/dashboard.html" target="content-frame">Dashboard</a></li>
-            <li><a href="../therapist-module/patient-management/group-management.html" target="content-frame">Group Management</a></li>
-            <li><a href="../therapist-module/patient-management/patient-list.html" target="content-frame">Patient Management</a></li>
+    if (role === 'therapist') {
+        // Therapist-specific links
+        navItems = `
+            <li><a href="../therapist-module/dashboard/dashboard.html" target="content-frame" data-initial="D">Dashboard</a></li>
+            <li><a href="../therapist-module/patient-management/group-management.html" target="content-frame" data-initial="G">Group Management</a></li>
+            <li><a href="../therapist-module/patient-management/patient-list.html" target="content-frame" data-initial="P">Patient Management</a></li>
         `;
-		// Load therapist dashboard by default
-		contentFrame.src = '../therapist-module/dashboard/dashboard.html';
-	} else if (role === 'patient') {
-		// Patient-specific links
-		navItems = `
-            <li><a href="journal-entry.html" target="content-frame">Journal Entry</a></li>
-            <li><a href="eating-habit.html" target="content-frame">Eating Habit</a></li>
+        // Load therapist dashboard by default
+        contentFrame.src = '../therapist-module/dashboard/dashboard.html';
+    } else if (role === 'patient') {
+        // Patient-specific links
+        navItems = `
+            <li><a href="journal-entry.html" target="content-frame" data-initial="J">Journal Entry</a></li>
+            <li><a href="eating-habit.html" target="content-frame" data-initial="E">Eating Habit</a></li>
         `;
-		// Load patient dashboard or appropriate content
-		contentFrame.src = 'journal-entry.html';
-	} else {
-		// // Default message for unknown roles
-		// navItems = `<li>No role assigned. Please contact support.</li>`;
-		// contentFrame.src = '';
+        // Load patient dashboard or appropriate content
+        contentFrame.src = 'journal-entry.html';
+    } else {
+        // Default message for unknown roles
+        navItems = `<li>No role assigned. Please contact support.</li>`;
+        contentFrame.src = '';
+    }
 
-		// Therapist-specific links
-		navItems = `
-            <li><a href="../therapist-module/dashboard/dashboard.html" target="content-frame">Dashboard</a></li>
-            <li><a href="../therapist-module/patient-management/group-management.html" target="content-frame">Group Management</a></li>
-            <li><a href="../therapist-module/patient-management/patient-list.html" target="content-frame">Patient Management</a></li>
-        `;
-		// Load therapist dashboard by default
-		contentFrame.src = '../therapist-module/dashboard/dashboard.html';
-	}
+    // Insert navigation items into sidebar
+    navList.innerHTML = navItems;
 
-	// Insert navigation items into sidebar
-	navList.innerHTML = navItems;
-
-	// Optionally, set username in the header if stored
-	const username = localStorage.getItem('username');
-	document.getElementById('username').innerText = username
-		? username
-		: 'User';
+    // Set username in the header if available in localStorage
+    document.getElementById('username').innerText = username ? username : 'User';
 }
 
-// Call the function on page load
-window.onload = loadContentBasedOnRole;
+// Function to inherit the title of the iframe's content
+function updateTitle() {
+    const iframe = document.getElementById('content-frame');
+    iframe.onload = function () {
+        const iframeTitle = iframe.contentWindow.document.title;
+        document.title = iframeTitle;
+    };
+}
+
+// Toggle the sidebar collapse
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('collapsed');
+}
+
+// Call the functions on page load
+window.onload = function () {
+    loadContentBasedOnRole();
+    updateTitle();
+};

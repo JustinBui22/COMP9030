@@ -9,14 +9,14 @@ body {
 
 /* Header styling */
 #header {
-    width: 100%; /* Ensures header takes full width */
+    width: 100%;
     background-color: #f4f4f4;
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box; /* Prevents overflow issues */
+    box-sizing: border-box;
 }
 
 .placeholder {
@@ -44,7 +44,7 @@ body {
 #layout {
     display: flex;
     flex: 1;
-    overflow: hidden; /* Prevent overflowing content */
+    overflow: hidden;
 }
 
 /* Sidebar styling */
@@ -55,8 +55,38 @@ body {
     padding: 20px;
     height: 100%;
     box-sizing: border-box;
+    transition: width 0.3s ease;
+    position: relative;
 }
 
+#sidebar.collapsed {
+    width: 60px;
+}
+
+#sidebar.collapsed nav ul li a {
+    font-size: 0;
+}
+
+#sidebar.collapsed nav ul li a::before {
+    content: attr(data-initial);
+    font-size: 18px;
+    display: block;
+    color: white;
+}
+
+/* Collapsible Button Styling */
+#collapse-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Remove list style (no bullet points) */
 #sidebar nav ul {
     list-style-type: none;
     padding: 0;
@@ -66,10 +96,15 @@ body {
     margin: 20px 0;
 }
 
+/* Ensure links are left aligned and not centered */
 #sidebar nav ul li a {
     color: white;
     text-decoration: none;
     font-size: 18px;
+    display: block;
+    padding: 10px;
+    text-align: left; /* Ensures text is left-aligned */
+    transition: font-size 0.3s ease;
 }
 
 #sidebar nav ul li a:hover {
@@ -79,7 +114,7 @@ body {
 /* Content area styling */
 #content {
     flex: 1;
-    overflow-y: auto; /* Make content scrollable if it overflows */
+    overflow-y: auto;
     padding: 20px;
     box-sizing: border-box;
 }
