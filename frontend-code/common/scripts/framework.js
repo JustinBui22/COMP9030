@@ -19,11 +19,13 @@ function loadContentBasedOnRole() {
     } else if (role === 'patient') {
         // Patient-specific links
         navItems = `
+            <li><a href="../patient-module/dashboard/Dashboard.html" target="content-frame" data-initial="D">Dashboard</a></li>
+            <li><a href="../patient-module/dashboard/Patient.html" target="content-frame" data-initial="J">Exercise Tracker</a></li>
             <li><a href="journal-entry.html" target="content-frame" data-initial="J">Journal Entry</a></li>
             <li><a href="eating-habit.html" target="content-frame" data-initial="E">Eating Habit</a></li>
         `;
         // Load patient dashboard or appropriate content
-        contentFrame.src = 'journal-entry.html';
+        contentFrame.src = "../patient-module/dashboard/Dashboard.html";
     } else {
         // Default message for unknown roles
         navItems = `<li>No role assigned. Please contact support.</li>`;
