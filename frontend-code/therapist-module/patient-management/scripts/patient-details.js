@@ -43,3 +43,7 @@ document.querySelectorAll('.more').forEach(function(element) {
         }
     });
 });
+// Function to go back to the previous page
+function goBack() {
+    window.history.back();
+}
