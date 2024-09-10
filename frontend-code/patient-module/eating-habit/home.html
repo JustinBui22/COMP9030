@@ -22,7 +22,6 @@
                 <li><a href="food-log-dashboard.html">Log Food</a></li>
                 <li><a href="add-exercise-dashboard.html">Exercise Library</a></li>
                 <li><a href="add-food-dashboard.html">Food Library</a></li>
-                <li><a href="#">Progress</a></li>
             </ul>
         </nav>
     </header>
@@ -30,18 +29,31 @@
     <!-- Main Dashboard Content -->
     <main class="dashboard">
         <!-- Summary Section -->
-        <section class="summary">
+        <section>
             <h2>Today's Summary</h2>
-            <div class="summary-cards">
-                <div class="card">
+            <div>
+                <div>
+                    <h3>Goals</h3>
+                    <p>Current weight: <input id="number-input" type="number" name="number" oninput="displayNumber()"></p>
+                    <p>Targeted weight: <input id="number-input" type="number" name="number" oninput="displayNumber()"></p</p>
+                    <p>Activity level: 
+                        <select id="number-dropdown" name="numbers">
+                            <option value="Not Very Active">Not Very Active</option>
+                            <option value="Lightly Active">Lightly Active</option>
+                            <option value="Active">Active</option>
+                            <option value="Very Active">Very Active</option>
+                        </select>
+                    </p>
+                </div>
+                <div>
                     <h3>Calories</h3>
                     <p>1,200 / 2,000 kcal</p>
                 </div>
-                <div class="card">
+                <div">
                     <h3>Steps</h3>
                     <p>5,000 / 10,000</p>
                 </div>
-                <div class="card">
+                <div">
                     <h3>Water Intake</h3>
                     <p>4 / 8 cups</p>
                 </div>
@@ -49,7 +61,7 @@
         </section>
 
         <!-- Log Section -->
-        <section class="log">
+        <section">
             <h2>Recent Logs</h2>
             <table>
                 <thead>
@@ -83,7 +95,7 @@
             </table>
         </section>
         <div class="back-to-dashboard-container">
-            <input type="submit" id="back-to-dashboard-button" value="Back to Main Dashboard" onclick="window.location.href='../patient-module/dashboard/Dashboard.html';">
+            <input type="submit" id="back-to-dashboard-button" value="Back to Main Dashboard" onclick="window.location.href='../dashboard/Dashboard.html';">
         </div>    
     </main>
 

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Justin Bui">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="styles/style.css"> <!-- Link to your CSS file -->
+</head>
+
+
+
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <h1>EatingHabitPal</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="food-log-dashboard.html">Log Food</a></li>
+                <li><a href="add-exercise-dashboard.html">Exercise Library</a></li>
+                <li><a href="add-food-dashboard.html">Food Library</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Dashboard Content -->
+    <main class="dashboard">
+        <!-- Summary Section -->
+        <section class="summary">
+            <h2>Today's Summary</h2>
+            <div class="summary-cards">
+                <div class="card">
+                    <h3>If you keep nutrients input like today in the next 5 weeks, you'd weigh:</h3>
+                    <p>79.9 kgs</p>
+                </div>
+            
+        </section>
+        <div class="back-to-dashboard-container">
+            <input type="submit" id="back-to-dashboard-button" value="Back" onclick="window.location.href='home.html';">
+        </div>    
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 EatingHabitPal. All rights reserved.</p>
+    </footer>
+
+    <script src="scripts.js"></script> <!-- Link to your JavaScript file -->
+</body>
+</html>

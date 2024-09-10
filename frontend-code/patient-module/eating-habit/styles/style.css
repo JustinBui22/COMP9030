@@ -43,6 +43,20 @@ body, ul {
     text-decoration: underline;
 }
 
+.summary {
+    text-align: center;
+    font-size: 25px;
+    .card {
+        h3 {
+            font-size: 40px;
+        }
+        p {
+            font-size: 80px;
+        }
+    }
+    
+}
+
 .date-switcher {
     display: flex;
     align-items: center;
@@ -274,6 +288,7 @@ body, ul {
     transition: background-color 0.3s ease;
 }
 .complete-day-dairy-container {
+    margin-top: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
