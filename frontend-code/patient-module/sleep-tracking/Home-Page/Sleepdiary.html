@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sleep Diary</title>
+    <link rel="stylesheet" href="Sleep-Diary/Styles/style.css">
+</head>
+<body>
+    <div class="sleep-diary-container">
+        <div class="header"> 
+            <span>Past week sleep diary completion: 2/7</span>
+            <button class="close-button" onclick="closeDiary()">&times;</button>
+        </div>
+        <div class="progress-bar">
+            <div class="progress" style="width: 30%;"></div>
+        </div>
+        <div class="reminder">
+            <span>Sleep Diary Reminder</span>
+            
+            <label class="switch">
+                <input type="checkbox" checked>
+                <span class="slider round"></span>
+            </label>
+        </div>
+        <button class="add-entry-button" onclick="openEntryForm()">Add New Entry</button>
+
+        <div class="entries">
+            <p><span>April 16, 2024</span><span>7 hours</span><span>18 minutes</span></p>
+            <p><span>April 15, 2024</span><span>7 hours</span><span>30 minutes</span></p>
+    
+        </div>
+    </div>
+
+    
+    <div class="entry-form-container" id="entryFormContainer" style="display:none;">
+        <div class="entry-form">
+            <h2>Add Sleep Duration</h2>
+            <label for="date">Date:</label>
+            <input type="date" id="date">
+            <label for="hours">Hours:</label>
+            <input type="number" id="hours" min="0" max="24">
+            <label for="minutes">Minutes:</label>
+            <input type="number" id="minutes" min="0" max="59">
+            <div class="form-buttons">
+                <button onclick="addEntry()">Add</button>
+                <button onclick="closeEntryForm()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="Sleep-Diary/Scripts/script.js"></script>
+</body>
+</html>

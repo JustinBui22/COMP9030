@@ -1,0 +1,159 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    width: 80%;
+    max-width: 1200px;
+}
+
+header {
+    grid-column: span 2;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-size: 24px;
+    color: #333;
+}
+
+.sleep-summary, .sleep-trend, .sleep-quality {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sleep-summary .summary-header, 
+.sleep-trend .trend-header, 
+.sleep-quality .quality-header {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.sleep-summary .summary-content, 
+.sleep-quality .quality-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.manual-entry-container, 
+.diary-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.entry-title, 
+.diary-title {
+    margin-top: 5px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#timer {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.sleep-trend .trend-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 400px;
+}
+
+.sleep-trend .trend-content canvas {
+    width: 100%;
+    height: 350px;
+    background: #e9ecef;
+    border-radius: 10px;
+}
+
+.sleep-trend .average-duration {
+    text-align: center;
+    margin-top: auto;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+}
+
+button {
+    width: 50px;
+    height: 50px;
+    background: #eee;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    outline: none;
+    transition: background 0.3s ease;
+    text-align: center;
+}
+
+button:hover {
+    background: #ccc;
+}
+
+.sleep-quality .quality-content .quality-button {
+    width: 50px;
+    height: 50px;
+    background: #eee;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    outline: none;
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.sleep-quality .quality-content .quality-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 10px;
+}
+
+.sleep-quality .quality-content .quality-text {
+    margin-top: 5px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.sleep-quality .quality-content .quality-button:hover {
+    background: #ccc;
+}
+
+.sleep-quality .quality-content .selected {
+    border-color: #000000;
+    background: #e7f0ff;
+}
+    
+.total-duration {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+}

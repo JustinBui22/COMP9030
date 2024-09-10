@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sleep Tracker</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="Styles/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sleep Tracker</h1>
+        </header>
+
+        <div class="sleep-summary">
+            <div class="summary-header">Sleep Summary</div>
+            <div class="summary-content">
+                <div class="manual-entry-container">
+                    <button class="manual-entry" onclick="window.location.href='manualentry.html'">+</button>
+                    <span class="entry-title">Manual Entry</span>
+                </div>
+                <div class="record">
+                    <div id="timer">00:00:00</div> 
+                    <button class="record-btn" onclick="play()">&#9654;</button>
+                    <button class="record-btn" onclick="pause()">&#10074;&#10074;</button>
+                    <button class="record-btn" onclick="stop()">&#9632;</button>
+                    <button class="record-btn" onclick="rewind()">&#9198;</button>
+                    <button class="record-btn" onclick="forward()">&#9197;</button>
+                </div>
+                <div class="diary-container">
+                    <button class="diary" onclick="window.location.href='sleepdiary.html'">&#128214;</button>
+                    <span class="diary-title">Diary</span>
+                </div>
+            </div>
+            <div class="total-duration">Total sleep duration: 7hrs 45mins</div>
+        </div>
+
+        <div class="sleep-trend">
+            <div class="trend-header">Sleep Trend Analysis</div>
+            <div class="trend-content">
+                <canvas id="sleepTrendChart"></canvas>
+                <div class="average-duration">Average sleep hours through the week: 7hrs 30mins</div>
+            </div>
+        </div>
+
+        <div class="sleep-quality">
+            <div class="quality-header">Sleep Quality Indicator</div>
+            <div class="quality-content">
+                <div class="quality-item">
+                    <button class="quality-button" id="good" onclick="selectQuality('good')">😊</button>
+                    <span class="quality-text">Good</span>
+                </div>
+                <div class="quality-item">
+                    <button class="quality-button" id="fair" onclick="selectQuality('fair')">😐</button>
+                    <span class="quality-text">Fair</span>
+                </div>
+                <div class="quality-item">
+                    <button class="quality-button" id="poor" onclick="selectQuality('poor')">😞</button>
+                    <span class="quality-text">Poor</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="Scripts/script.js"></script>
+</body>
+</html>
