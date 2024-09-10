@@ -60,3 +60,51 @@ window.onload = function () {
     loadContentBasedOnRole();
     updateTitle();
 };
+
+// Toggle the user dropdown for profile actions
+function toggleDropdown() {
+    const dropdown = document.getElementById('user-dropdown');
+    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+}
+
+// Handle logout logic
+function logout() {
+    localStorage.removeItem('userData');
+    window.location.href = '../login/login.html'; // Redirect to login page
+}
+
+// Open edit profile modal
+function openEditProfile() {
+    const userData = JSON.parse(localStorage.getItem('userData'));
+
+    // Prefill form with current user data
+    document.getElementById('editUsername').value = userData.username;
+    document.getElementById('editEmail').value = userData.email;
+
+    document.getElementById('editProfileModal').style.display = 'block';
+}
+
+// Close edit profile modal
+function closeEditProfile() {
+    document.getElementById('editProfileModal').style.display = 'none';
+}
+
+// Handle form submission to save updated profile
+document.getElementById('editProfileForm').addEventListener('submit', function (event) {
+    event.preventDefault(); // Prevent form from refreshing the page
+
+    const updatedUsername = document.getElementById('editUsername').value;
+    const updatedEmail = document.getElementById('editEmail').value;
+
+    // Update localStorage
+    let userData = JSON.parse(localStorage.getItem('userData'));
+    userData.username = updatedUsername;
+    userData.email = updatedEmail;
+    localStorage.setItem('userData', JSON.stringify(userData));
+
+    // Update the displayed username
+    document.getElementById('username').innerText = updatedUsername;
+
+    // Close modal
+    closeEditProfile();
+});
