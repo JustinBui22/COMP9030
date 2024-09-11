@@ -22,3 +22,25 @@ function viewDetails(patientId) {
     // Redirect to the patient details page with the patient ID as a URL query parameter
     window.location.href = `../patient-management/patient-details.html?id=${encodeURIComponent(patientId)}`;
 }
+
+
+// Function to open the Add Note modal
+function openAddNoteModal() {
+    document.getElementById('addNoteModal').style.display = 'block';
+}
+
+// Function to close the Add Note modal
+function closeAddNoteModal() {
+    document.getElementById('addNoteModal').style.display = 'none';
+}
+
+// Function to save the note (simple alert for now)
+function saveNote() {
+    const noteContent = document.getElementById('noteContent').value;
+    if (noteContent) {
+        alert("Note saved: " + noteContent);
+        closeAddNoteModal(); // Close the modal after saving
+    } else {
+        alert("Please enter a note.");
+    }
+}

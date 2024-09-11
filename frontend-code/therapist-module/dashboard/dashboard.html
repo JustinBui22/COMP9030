@@ -26,7 +26,7 @@
             <p>Status: Active</p>
             <p>Group: A</p>
             <button onclick="viewDetails('101')">View Details</button>
-            <button>Add Note</button>
+            <button onclick="openAddNoteModal('103')">Add Note</button>
         </div>
 
         <!-- Card for Patient 2 -->
@@ -50,8 +50,19 @@
         </div>
 
         <!-- Add more patient cards as needed -->
+
     </div>
 
+
+    <!-- Add Note Modal -->
+    <div id="addNoteModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAddNoteModal()">&times;</span>
+            <h2>Add Note</h2>
+            <textarea id="noteContent" placeholder="Write your note here..."></textarea>
+            <button onclick="saveNote()">Save Note</button>
+        </div>
+    </div>
     <script src="scripts/dashboard.js"></script> <!-- Link to external JS -->
 </body>
 </html>

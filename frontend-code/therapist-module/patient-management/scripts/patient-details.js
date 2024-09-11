@@ -47,3 +47,24 @@ document.querySelectorAll('.more').forEach(function(element) {
 function goBack() {
     window.history.back();
 }
+
+// Function to open the Add Note modal
+function openAddNoteModal() {
+    document.getElementById('addNoteModal').style.display = 'block';
+}
+
+// Function to close the Add Note modal
+function closeAddNoteModal() {
+    document.getElementById('addNoteModal').style.display = 'none';
+}
+
+// Function to save the note (simple alert for now)
+function saveNote() {
+    const noteContent = document.getElementById('noteContent').value;
+    if (noteContent) {
+        alert("Note saved: " + noteContent);
+        closeAddNoteModal(); // Close the modal after saving
+    } else {
+        alert("Please enter a note.");
+    }
+}
