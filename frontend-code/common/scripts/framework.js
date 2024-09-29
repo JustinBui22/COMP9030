@@ -10,12 +10,12 @@ function loadContentBasedOnRole() {
     if (role === 'therapist') {
         // Therapist-specific links
         navItems = `
-            <li><a href="../therapist-module/dashboard/dashboard.html" target="content-frame" data-initial="D">Dashboard</a></li>
+            <li><a href="../therapist-module/dashboard/dashboard.php" target="content-frame" data-initial="D">Dashboard</a></li>
             <li><a href="../therapist-module/patient-management/group-management.html" target="content-frame" data-initial="G">Group Management</a></li>
             <li><a href="../therapist-module/patient-management/patient-list.html" target="content-frame" data-initial="P">Patient Management</a></li>
         `;
         // Load therapist dashboard by default
-        contentFrame.src = '../therapist-module/dashboard/dashboard.html';
+        contentFrame.src = '../therapist-module/dashboard/dashboard.php';
     } else if (role === 'patient') {
         // Patient-specific links
         navItems = `
