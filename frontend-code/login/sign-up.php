@@ -75,7 +75,6 @@
             roleInput.addEventListener("change", checkFormValidity);
             termsCheckbox.addEventListener("change", checkFormValidity);
 
-            // 檢查 email 格式
             emailInput.addEventListener("input", function () {
                 const emailError = document.getElementById("emailError");
                 const emailPattern = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
@@ -86,7 +85,6 @@
                 }
             });
 
-            // 檢查 username 和 email 是否已存在
             usernameInput.addEventListener("blur", function () {
                 checkExists("username", usernameInput.value, "usernameError");
             });
@@ -104,7 +102,7 @@
                         if (xhr.status === 200) {
                             const response = JSON.parse(xhr.responseText);
                             errorMessage.textContent = response.exists ? `${field.charAt(0).toUpperCase() + field.slice(1)} is already taken.` : "";
-                            checkFormValidity(); // 每次檢查後更新按鈕狀態
+                            checkFormValidity(); 
                         }
                     };
                     xhr.send();
