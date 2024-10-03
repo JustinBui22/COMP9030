@@ -42,7 +42,7 @@
                 <input type="checkbox" id="terms" name="terms" required />
                 <label for="terms">I agree to the terms & conditions</label>
             </div>
-            <button id="button" disabled>Sign up</button>
+            <button type="submit" id="button" disabled>Sign up</button>
             <p>
                 Already have an account?
                 <a href="login.php" class="signin-button">Sign in</a>
@@ -96,16 +96,15 @@
             const checkExists = (field, value, errorId) => {
                 const errorMessage = document.getElementById(errorId);
                 if (value) {
-                    const xhr = new XMLHttpRequest();
-                    xhr.open("GET", `check-exists.php?field=${field}&value=${encodeURIComponent(value)}`, true);
-                    xhr.onload = function () {
-                        if (xhr.status === 200) {
-                            const response = JSON.parse(xhr.responseText);
-                            errorMessage.textContent = response.exists ? `${field.charAt(0).toUpperCase() + field.slice(1)} is already taken.` : "";
+                    fetch(`check-exists.php?field=${field}&value=${encodeURIComponent(value)}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            errorMessage.textContent = data.exists ? `${field.charAt(0).toUpperCase() + field.slice(1)} is already taken.` : "";
                             checkFormValidity(); 
-                        }
-                    };
-                    xhr.send();
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
                 } else {
                     errorMessage.textContent = "";
                 }
