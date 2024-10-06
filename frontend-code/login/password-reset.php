@@ -3,9 +3,8 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta http-equiv="refresh" content="5;url=new-password.html" />
+		<meta http-equiv="refresh" content="5;url=new-password.php" />
 		<link rel="stylesheet" href="styles/style.css" />
-		<script defer src="scripts/script.js"></script>
 		<title>Password Reset</title>
 	</head>
 	<body>
@@ -22,5 +21,15 @@
 				</p>
 			</div>
 		</div>
+		<script>
+			const resetData = JSON.parse(localStorage.getItem('resetData'));
+
+			if (resetData) {
+				const emailElement = document.querySelector('.reset-email-placeholder');
+				if (emailElement) {
+					emailElement.textContent = resetData.email;
+				}
+			}
+		</script>
 	</body>
 </html>

@@ -18,7 +18,7 @@
 						Congratulations, Your account has been successfully
 						created.
 					</p>
-					<button onclick="window.location.href='login.html'">
+					<button onclick="window.location.href='login.php'">
 						Continue
 					</button>
 				</div>
