@@ -1,0 +1,355 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto auto;
+    gap: 20px;
+    width: 80%;
+    max-width: 1200px;
+    margin-top: 20px;
+}
+
+header {
+    grid-column: span 2;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-size: 24px;
+    color: #333;
+}
+
+.sleep-summary,
+.sleep-trend {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sleep-summary {
+    grid-column: 1 / span 1;
+    grid-row: 2;
+}
+
+.sleep-trend {
+    grid-column: 2 / span 1;
+    grid-row: 2;
+}
+
+.sleep-quality {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    grid-column: span 2;
+    grid-row: 3;
+}
+
+.sleep-summary .summary-header,
+.sleep-trend .trend-header,
+.sleep-quality .quality-header {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.sleep-summary .summary-content,
+.sleep-quality .quality-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.manual-entry-container,
+.diary-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.entry-title,
+.diary-title {
+    margin-top: 5px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+
+
+button {
+    width: 50px;
+    height: 50px;
+    background: #eee;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    outline: none;
+    transition: background 0.3s ease;
+    text-align: center;
+}
+
+button:hover {
+    background: #ccc;
+}
+
+#timer {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 10px;
+}
+
+#diaryTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+#diaryTable th,
+#diaryTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+#diaryTable th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.sleep-trend .average-duration {
+    text-align: center;
+    margin-top: auto;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+}
+
+.sleep-quality .quality-content .quality-button {
+    width: 50px;
+    height: 50px;
+    background: #eee;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    outline: none;
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.sleep-quality .quality-content .quality-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 10px;
+}
+
+.sleep-quality .quality-content .quality-text {
+    margin-top: 5px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.sleep-quality .quality-content .quality-button:hover {
+    background: #ccc;
+}
+
+
+.sleep-quality .quality-content .selected {
+    border-color: #000000;
+    background: #e7f0ff;
+}
+
+
+/* Style for buttons inside the modal form */
+.form-buttons button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    background-color: #eee;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    border-radius: 5px;
+    width: auto;
+    height: auto;
+
+}
+
+/* Hover effect to enhance the user experience */
+.form-buttons button:hover {
+    background-color: #ccc;
+}
+
+/* Ensure the buttons are spaced evenly */
+.form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    /* Align buttons to the right */
+    gap: 350px;
+    /* Space between the buttons */
+}
+
+/* Manual Entry Modal Styles */
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.modal-content label {
+    font-weight: bold;
+}
+
+.modal-content input {
+    padding: 8px;
+    font-size: 14px;
+}
+
+/* Styling for the table in the diary modal */
+#diaryTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+#diaryTable th,
+#diaryTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+#diaryTable th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+/* Scrollable diary entries */
+.modal-content {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+
+/* Modal for confirmation messages */
+#confirmationModal {
+    display: none;
+    position: fixed;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+#confirmationModal .modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* Confirmation modal button */
+#confirmationModal button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    background-color: #eee;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    border-radius: 5px;
+}
+
+#confirmationModal button:hover {
+    background-color: #ccc;
+}
+
+#cnotification-container {
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    z-index: 1000 !important;
+}
+
+.cnotification {
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Different styles for cnotification types */
+.cnotification.success {
+    background-color: #4CAF50 !important;
+}
+
+.cnotification.error {
+    background-color: #f44336;
+}
+
+.cnotification.info {
+    background-color: #2196F3;
+    /* Blue */
+}
+
+.cnotification.warning {
+    background-color: #FF9800;
+    /* Orange */
+}
+
+/* Fade out effect */
+.cnotification.fade-out {
+    opacity: 0;
+    /* Fade to transparent */
+    transform: translateY(-20px);
+    /* Move slightly up */
+}

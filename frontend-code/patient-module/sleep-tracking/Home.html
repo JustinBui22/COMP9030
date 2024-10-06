@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sleep Tracker</title>
+    <link rel="stylesheet" href="Styles/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Sleep Tracker</h1>
+        </header>
+
+        <!-- Sleep Summary Section -->
+        <div class="sleep-summary">
+            <div id="cnotification-container"></div>
+
+            <div class="summary-header">Sleep Summary</div>
+            <input type="hidden" id="user_id" name="user_id" value="5" required>
+            <div class="summary-content">
+                <!-- Manual Entry Button -->
+                <div class="manual-entry-container">
+                    <button class="manual-entry" onclick="openManualEntryModal()">+</button>
+                    <span class="entry-title">Manual Entry</span>
+                </div>
+
+                <div class="record">
+                    <div id="timer">00:00:00</div>
+                    <button class="record-btn" onclick="play()">&#9654;</button>
+                    <button class="record-btn" onclick="pause()">&#10074;&#10074;</button>
+                    <button class="record-btn" onclick="stopAndSave()">&#9632;</button>
+                    <button class="record-btn" onclick="rewind()">&#9198;</button>
+                    <button class="record-btn" onclick="forward()">&#9197;</button>
+                </div>
+
+                <!-- Diary Button -->
+                <div class="diary-container">
+                    <button class="diary" onclick="openDiaryModalNew()">&#128214;</button>
+                    <span class="diary-title">Diary</span>
+                </div>
+            </div>
+            <div></div>
+        </div>
+
+
+        <div class="sleep-trend">
+            <div class="trend-header">Sleep Trend Analysis</div>
+            <div class="trend-content">
+                <canvas id="sleepTrendChart" width="450" height="280"></canvas>
+                <div class="average-duration" id="average-duration">Average sleep hours this week: 0 hrs 0 mins</div>
+            </div>
+        </div>
+
+        <!-- Sleep Quality Indicator Section -->
+        <div class="sleep-quality">
+            <div class="quality-header">Sleep Quality Indicator</div>
+            <div class="quality-content">
+                <div class="quality-item">
+                    <button class="quality-button" id="good">😊</button>
+                    <span class="quality-text">Good</span>
+                </div>
+                <div class="quality-item">
+                    <button class="quality-button" id="fair">😐</button>
+                    <span class="quality-text">Fair</span>
+                </div>
+                <div class="quality-item">
+                    <button class="quality-button" id="poor">😞</button>
+                    <span class="quality-text">Poor</span>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <!-- Confirmation Modal -->
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <h2 id="confirmationMessage">Are you sure you want to remove this entry?</h2>
+            <div class="confirmation-buttons">
+                <button id="confirmRemove">Yes</button> <!-- This button confirms the removal -->
+                <button onclick="closeConfirmationModal()">No</button> <!-- This button cancels the removal -->
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Manual Entry Modal -->
+    <div id="manualEntryModal" class="modal">
+        <div class="modal-content">
+            <h2>Manual Sleep Entry</h2>
+            <form id="manualEntryForm">
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" required>
+                <label for="hours">Hours:</label>
+                <input type="number" id="hours" name="hours" min="0" required>
+                <label for="minutes">Minutes:</label>
+                <input type="number" id="minutes" name="minutes" max="59" min="0" required>
+                <div class="form-buttons">
+                    <button type="button" onclick="closeManualEntryModal()">Cancel</button>
+                    <button id="saveButton" type="submit">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Diary Modal -->
+    <div id="diaryModal" class="modal modal-lg">
+        <div class="modal-content">
+            <h4>Sleep Diary</h4>
+            <table class="table" id="diaryTable">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Hours</th>
+                        <th>Minutes</th>
+                        <th>Action </th>
+                    </tr>
+                </thead>
+                <tbody id="diaryEntries">
+                    <!-- Entries will be dynamically inserted here -->
+                </tbody>
+            </table>
+            <br>
+            <div class="form-buttons">
+                <button onclick="closeDiaryModal()">Close</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script src="Scripts/script2.js"></script>
+<script src="Scripts/script.js"></script>
