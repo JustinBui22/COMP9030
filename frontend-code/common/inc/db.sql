@@ -49,3 +49,11 @@ VALUES
 ('John Doe', 'Male', 32, 180, 75, 'Active', 'Group A', 1, '../../common/assets/images/patient_icon.png'),
 ('Jane Smith', 'Female', 28, 165, 60, 'Inactive', 'Group B', 1, '../../common/assets/images/patient_icon.png'),
 ('Bob Brown', 'Male', 45, 175, 85, 'Active', 'Group A', 1, '../../common/assets/images/patient_icon.png');
+
+CREATE TABLE journal_entries (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    entry_date DATE NOT NULL,
+    journal_text TEXT,
+    mood VARCHAR(50),
+    mood_notes TEXT
+);
