@@ -1,89 +1,124 @@
-// Sample patient data
-const patients = [
-    { name: "John Doe", status: "Active", group: "group_a" },
-    { name: "Jane Smith", status: "Inactive", group: "group_b" },
-    { name: "Bob Brown", status: "Active", group: "group_a" },
-    // Add more sample patients
-];
-
 // Load initial data and apply URL filters
 window.onload = function () {
     const urlParams = new URLSearchParams(window.location.search);
     const groupFilter = urlParams.get('group') || 'all';
-    const fromGroupManagement = urlParams.get('from') === 'group-management'; // Check if accessed from Group Management
+    const fromGroupManagement = urlParams.get('from') === 'group-management';
 
-    // Display return buttons if from Group Management page
+    // Display return button if from Group Management page
     if (fromGroupManagement) {
         document.getElementById('return-button').style.display = 'inline-block';
     }
 
     document.getElementById('group-filter').value = groupFilter;
-    loadPatients(groupFilter);
 };
 
-// Load patients based on the selected group filter
-function loadPatients(group) {
-    const tbody = document.getElementById('patient-tbody');
-    tbody.innerHTML = ''; // Clear current rows
-
-    const filteredPatients = patients.filter(patient => {
-        return group === 'all' || patient.group === group;
-    });
-
-    filteredPatients.forEach(patient => {
-        const row = `<tr>
-            <td>${patient.name}</td>
-            <td>${patient.status}</td>
-            <td>${patient.group}</td>
-            <td>
-                <button onclick="viewPatient('${patient.name}')">View</button>
-                <button onclick="editPatient('${patient.name}')">Edit</button>
-            </td>
-        </tr>`;
-        tbody.insertAdjacentHTML('beforeend', row);
-    });
-}
-
-// Filter patients when group filter is changed
+// Filter patients when the group filter is changed
 function filterPatients() {
     const selectedGroup = document.getElementById('group-filter').value;
-    loadPatients(selectedGroup);
+    window.location.href = `patient-list.php?group=${selectedGroup}`;
 }
 
 // Sort patients based on the selected option
 function sortPatients() {
+    const table = document.getElementById("patient-table");
+    const rows = Array.from(table.rows).slice(1); // Ignore the header row
     const sortBy = document.getElementById('sort-options').value;
-    patients.sort((a, b) => {
-        if (a[sortBy] < b[sortBy]) return -1;
-        if (a[sortBy] > b[sortBy]) return 1;
-        return 0;
+
+    rows.sort((rowA, rowB) => {
+        const cellA = rowA.querySelector(`td:nth-child(${getSortIndex(sortBy)})`).innerText;
+        const cellB = rowB.querySelector(`td:nth-child(${getSortIndex(sortBy)})`).innerText;
+        return cellA.localeCompare(cellB);
     });
-    const selectedGroup = document.getElementById('group-filter').value;
-    loadPatients(selectedGroup);
+
+    rows.forEach(row => table.appendChild(row)); // Reattach rows in sorted order
 }
 
-// Function to add a new patient
-function addPatient() {
-    alert('Add Patient functionality');
-    // Implement logic to add a new patient (e.g., open a form)
+function getSortIndex(sortBy) {
+    switch (sortBy) {
+        case 'name': return 1;
+        case 'status': return 2;
+        case 'group': return 3;
+    }
 }
 
-// Function to export the patient list
-function exportPatients() {
-    alert('Export Patients functionality');
-    // Implement logic to export the patient list (e.g., generate CSV)
+// Function to open the add patient modal
+function openAddPatientModal() {
+    document.getElementById('patient-id').value = ''; // Clear the ID for new entry
+    document.getElementById('patient-name').value = '';
+    document.getElementById('patient-status').value = 'Active';
+    document.getElementById('patient-group').value = '';
+    document.getElementById('patient-modal-title').innerText = 'Add Patient';
+    document.getElementById('patient-modal').style.display = 'block';
 }
 
-// Placeholder functions for patient actions
+// Function to open the edit patient modal and populate fields
+function openEditPatientModal(patientId) {
+    document.getElementById('patient-modal-title').innerText = 'Edit Patient';
+
+    // Fetch patient info via AJAX
+    fetch(`patient-actions.php?action=getPatient&patient_id=${patientId}`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('patient-id').value = data.id;
+            document.getElementById('patient-name').value = data.name;
+            document.getElementById('patient-status').value = data.status;
+            document.getElementById('patient-group').value = data.patient_group;
+        })
+        .catch(error => console.error('Error:', error));
+
+    document.getElementById('patient-modal').style.display = 'block';
+}
+
+// Function to save patient info (add/edit)
+function savePatient() {
+    const patientId = document.getElementById('patient-id').value;
+    const patientName = document.getElementById('patient-name').value;
+    const patientStatus = document.getElementById('patient-status').value;
+    const patientGroup = document.getElementById('patient-group').value;
+
+    const formData = new FormData();
+    formData.append('action', patientId ? 'editPatient' : 'addPatient');
+    formData.append('patient_id', patientId);
+    formData.append('name', patientName);
+    formData.append('status', patientStatus);
+    formData.append('group_id', patientGroup);
+
+    fetch('patient-actions.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        displayNotification(data.message); // Display floating notification
+        closeModal('patient-modal');
+        window.location.reload();  // Reload the page to refresh the patient list
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+// Function to close modals
+function closeModal(modalId) {
+    document.getElementById(modalId).style.display = 'none';
+}
+
+// Display floating notification
+function displayNotification(message) {
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.innerText = message;
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+        notification.remove();
+    }, 3000); // Remove notification after 3 seconds
+}
+
+// Function to view a patient
 function viewPatient(name) {
-    window.location.href = `../patient-management/patient-details.html?id=${encodeURIComponent(name)}`;
+    window.location.href = `../patient-management/patient-details.php?id=${encodeURIComponent(name)}`;
 }
 
-function editPatient(name) {
-    alert('Editing patient: ' + name);
-}
-
-// Return to the Group Management page
+// Function to go back to Group Management
 function goBack() {
     window.history.back(); // Go back to the previous page
 }

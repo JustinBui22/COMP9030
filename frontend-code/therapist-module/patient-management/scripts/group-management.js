@@ -86,14 +86,13 @@ function addMember() {
 function closeModal(modalId) {
     document.getElementById(modalId).style.display = 'none';
 }
-
 // Function to open the schedule modal and populate fields
 function openScheduleModal(groupId) {
     document.getElementById('group-id-schedule').value = groupId;
     document.getElementById('schedule-modal').style.display = 'block';
 }
 
-// Function to save a new schedule for the group
+// Function to save the new schedule
 function saveSchedule() {
     const groupId = document.getElementById('group-id-schedule').value;
     const title = document.getElementById('schedule-title').value;
@@ -117,5 +116,6 @@ function saveSchedule() {
         closeModal('schedule-modal');
         window.location.reload();  // Reload to update the upcoming schedule
     })
-    .catch(error => console.error('Error:', error)); // Catch any errors
+    .catch(error => console.error('Error:', error));
 }
+

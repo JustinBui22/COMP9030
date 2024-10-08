@@ -48,6 +48,7 @@ $result = mysqli_query($conn, $sql);
                 <button onclick="openEditModal(<?php echo $row['id']; ?>)">Edit Info</button>
                 <button onclick="openAddMemberModal(<?php echo $row['id']; ?>)">Add Member</button>
                 <button onclick="openViewModal(<?php echo $row['id']; ?>)">View Info</button>
+                <button onclick="openScheduleModal(<?php echo $row['id']; ?>)">Schedule Event</button> <!-- Schedule Event button -->
             </div>
         </div>
         <?php } ?>
@@ -100,6 +101,23 @@ $result = mysqli_query($conn, $sql);
                     ?>
                 </select>
                 <button type="button" onclick="addMember()">Add</button>
+            </form>
+        </div>
+    </div>
+    <!-- Schedule Event Modal -->
+    <div id="schedule-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('schedule-modal')">&times;</span>
+            <h3>Schedule Event</h3>
+            <form id="schedule-event-form">
+                <input type="hidden" id="group-id-schedule" value="">
+                <label for="schedule-title">Title:</label>
+                <input type="text" id="schedule-title" placeholder="Event Title">
+                <label for="schedule-date">Date:</label>
+                <input type="date" id="schedule-date">
+                <label for="schedule-description">Description:</label>
+                <textarea id="schedule-description" placeholder="Event Details"></textarea>
+                <button type="button" onclick="saveSchedule()">Save</button>
             </form>
         </div>
     </div>

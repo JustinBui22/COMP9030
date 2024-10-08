@@ -29,12 +29,12 @@ CREATE TABLE therapists (
 CREATE TABLE patients (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
-    gender ENUM('Male', 'Female', 'Other') NOT NULL,
-    age INT NOT NULL,
+    gender ENUM('Male', 'Female', 'Other'),
+    age INT,
     height DECIMAL(4,1), -- Adjust height if necessary
     weight DECIMAL(5,2), -- Weight in kg
     status ENUM('Active', 'Inactive', 'Discharged') DEFAULT 'Active',
-    patient_group VARCHAR(50) DEFAULT 'None', -- Consider linking to a groups table
+    patient_group INT,
     therapist_id INT,
     avatar_url VARCHAR(255) DEFAULT '../../common/assets/images/patient_icon.png',
     create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -60,7 +60,7 @@ CREATE TABLE groups (
     therapist_id INT,
     schedule_id INT, -- Link to schedule table
     create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 
@@ -72,10 +72,10 @@ CREATE TABLE group_members (
 );
 
 -- Inserting sample groups
-INSERT INTO groups (name, description, status, upcoming_schedule, member_count, therapist_id)
+INSERT INTO groups (name, description, status, therapist_id)
 VALUES 
-('Group A', 'This group focuses on rehabilitation and therapy.', 'Active', 'Meeting on 12th Aug, Therapy session on 15th Aug.', 15, 1),
-('Group B', 'This group focuses on mental health improvement.', 'Active', 'Mindfulness session on 10th Aug, Checkup on 17th Aug.', 12, 1);
+('Group A', 'This group focuses on rehabilitation and therapy.', 'Active', 1),
+('Group B', 'This group focuses on mental health improvement.', 'Active', 1);
 
 -- Inserting sample members into group_members
 INSERT INTO group_members (group_id, patient_id)
