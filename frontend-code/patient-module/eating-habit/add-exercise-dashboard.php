@@ -8,26 +8,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $calories = $_POST['calories'];
     $duration = $_POST['duration'];
 
-    // Prepare and bind the SQL statement to insert the data
-    $stmt = $conn->prepare("INSERT INTO exercises (ex_name, ex_calo, ex_duration) VALUES (?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO Test.exercises (ex_name, ex_calo, ex_duration) VALUES (?, ?, ?)");
     $stmt->bind_param("sii", $exercise, $calories, $duration);
 
     // Execute the SQL statement and fetch the updated list of exercises
     if ($stmt->execute()) {
-        $result = $conn->query("SELECT * FROM exercises");
+        $result = $conn->query("SELECT * FROM Test.exercises");
         $exercises = $result->fetch_all(MYSQLI_ASSOC);
         echo json_encode($exercises);
     } else {
         echo json_encode(["error" => "Failed to insert data"]);
     }
-
-    // Close the statement and exit
     $stmt->close();
     exit;
 }
 
 // Retrieve all exercises from the database
-$result = $conn->query("SELECT * FROM exercises");
+$result = $conn->query("SELECT * FROM Test.exercises");
 $exercises = [];
 
 if ($result->num_rows > 0) {
@@ -100,7 +97,7 @@ if ($result->num_rows > 0) {
                     <tbody id="exerciseBody">
                         <?php
                         // Retrieve exercises from the database
-                        $result = $conn->query("SELECT * FROM exercises");
+                        $result = $conn->query("SELECT * FROM Test.exercises");
 
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
@@ -126,14 +123,13 @@ if ($result->num_rows > 0) {
         </div>
     </main>
 
-    <!-- Footer -->
     <footer>
         <p>&copy; 2024 EatingHabitPal. All rights reserved.</p>
     </footer>
 
-    <!-- JavaScript to handle form submission and update exercise list -->
+    <!-- JavaScript to update exercise list -->
     <script>
-        // Helper function to generate exercise rows
+        // Function to generate exercise rows
         function generateExerciseRow(item) {
             return `
                 <tr>
@@ -156,7 +152,6 @@ if ($result->num_rows > 0) {
         document.getElementById('addExerciseForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
-            // Get form values
             const formData = new URLSearchParams(new FormData(this)).toString();
 
             // Send POST request to add exercise
@@ -169,14 +164,13 @@ if ($result->num_rows > 0) {
                 })
                 .then(response => response.json())
                 .then(data => {
-                    // Reset form and update exercise table
                     this.reset();
                     updateExerciseTable(data);
                 })
                 .catch(console.error);
         });
 
-        // Search functionality
+        // Search
         document.getElementById('searchForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
@@ -191,18 +185,18 @@ if ($result->num_rows > 0) {
                 .then(data => {
                     const exerciseBody = document.getElementById('exerciseBody');
                     const searchResultsMessage = document.getElementById('searchResultsMessage');
-                    searchResultsMessage.textContent = ''; // Clear previous search message
+                    searchResultsMessage.textContent = '';
 
                     if (data.length > 0) {
-                        updateExerciseTable(data); // Update table with search results
+                        updateExerciseTable(data);
                     } else {
                         searchResultsMessage.textContent = 'No such exercise found. Please create a new one.';
 
                         // Fetch all exercises from the database to display history
-                        fetch('get-data.php') // Create a separate PHP file to get all exercises
+                        fetch('get-data.php')
                             .then(response => response.json())
                             .then(allExercises => {
-                                updateExerciseTable(allExercises); // Populate table with all exercises
+                                updateExerciseTable(allExercises);
                             })
                             .catch(console.error);
                     }
@@ -210,18 +204,15 @@ if ($result->num_rows > 0) {
                 .catch(console.error);
         });
 
-        // Delegate event listener for dynamically added "Add Exercise" buttons
+        // Dynamically added "Add Exercise" buttons
         document.addEventListener('click', function(e) {
             if (e.target.classList.contains('add-exercise-btn')) {
-                // Parse the data-food JSON string
                 const exerciseData = JSON.parse(e.target.getAttribute('data-exercise'));
 
-                // Now you can access the values directly
                 const exName = exerciseData.name;
                 const exCalo = exerciseData.calories;
                 const exDuration = exerciseData.duration;
 
-                // Prepare the data to send to the log food page
                 const logData = {
                     ex_name: exName,
                     ex_calories: exCalo,
@@ -232,7 +223,6 @@ if ($result->num_rows > 0) {
                 loggedExercies.push(logData);
                 localStorage.setItem('loggedExercies', JSON.stringify(loggedExercies));
 
-                // Use Ajax to send the localStorage data to the server
                 fetch('log-food-dashboard.php', {
                     method: 'POST',
                     headers: {

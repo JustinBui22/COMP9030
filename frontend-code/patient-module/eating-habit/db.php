@@ -1,5 +1,4 @@
 <?php
-// db.php
 
 // Database connection details
 $host = 'database-9030.cho2aisawwwl.ap-southeast-2.rds.amazonaws.com';

@@ -2,10 +2,9 @@
 // Database connection details
 include "../../common/inc/dbconn.inc.php";
 
-// Initialize an array to hold the data
 $data = [];
 
-// Determine which data to fetch based on the type
+// Based on the type
 if ($type === 'exercise') {
     $result = $conn->query("SELECT * FROM exercises");
     if ($result->num_rows > 0) {
@@ -21,5 +20,5 @@ if ($type === 'exercise') {
     exit;
 }
 
-// Return the data as JSON
+// Data as JSON
 echo json_encode($data);

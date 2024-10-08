@@ -8,26 +8,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $calories = $_POST['calories'];
     $amount = $_POST['amount'];
 
-    // Prepare and bind the SQL statement to insert the data without meal type
-    $stmt = $conn->prepare("INSERT INTO food_info (food_name, food_calo, food_amount) VALUES (?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO Test.food_info (food_name, food_calo, food_amount) VALUES (?, ?, ?)");
     $stmt->bind_param("ssi", $foodInfo, $calories, $amount); // Removed meal type from binding
 
     // Execute the SQL statement and fetch the updated list of foods
     if ($stmt->execute()) {
-        $result = $conn->query("SELECT * FROM food_info");
+        $result = $conn->query("SELECT * FROM Test.food_info");
         $foodInfo = $result->fetch_all(MYSQLI_ASSOC);
         echo json_encode($foodInfo);
     } else {
         echo json_encode(["error" => "Failed to insert data"]);
     }
 
-    // Close the statement and exit
     $stmt->close();
     exit;
 }
 
 // Retrieve all food from the database
-$result = $conn->query("SELECT * FROM food_info");
+$result = $conn->query("SELECT * FROM Test.food_info");
 $foodInfo = [];
 
 if ($result->num_rows > 0) {
@@ -98,10 +96,9 @@ if ($result->num_rows > 0) {
                         </tr>
                     </thead>
                     <tbody id="foodBody">
-                        <!-- Existing foods fetched from the database -->
                         <?php
                         // Retrieve foods from the database
-                        $result = $conn->query("SELECT * FROM food_info");
+                        $result = $conn->query("SELECT * FROM Test.food_info");
 
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
@@ -134,14 +131,13 @@ if ($result->num_rows > 0) {
         </div>
     </main>
 
-    <!-- Footer -->
     <footer>
         <p>&copy; 2024 EatingHabitPal. All rights reserved.</p>
     </footer>
 
-    <!-- JavaScript to handle form submission and update food list -->
+    <!-- JavaScript to update food list -->
     <script>
-        // Helper function to generate food rows
+        // Function to generate food rows
         function generateFoodRow(item) {
             return `
                 <tr>
@@ -173,7 +169,6 @@ if ($result->num_rows > 0) {
         document.getElementById('addFoodForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
-            // Get form values
             const formData = new URLSearchParams(new FormData(this)).toString();
 
             // Send POST request to add food
@@ -186,14 +181,13 @@ if ($result->num_rows > 0) {
                 })
                 .then(response => response.json())
                 .then(data => {
-                    // Reset form and update food table
                     this.reset();
                     updateFoodTable(data);
                 })
                 .catch(console.error);
         });
 
-        // Search functionality
+        // Search
         document.getElementById('searchForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
@@ -208,18 +202,18 @@ if ($result->num_rows > 0) {
                 .then(data => {
                     const foodBody = document.getElementById('foodBody');
                     const searchResultsMessage = document.getElementById('searchResultsMessage');
-                    searchResultsMessage.textContent = ''; // Clear previous search message
+                    searchResultsMessage.textContent = '';
 
                     if (data.length > 0) {
-                        updateFoodTable(data); // Update table with search results
+                        updateFoodTable(data);
                     } else {
                         searchResultsMessage.textContent = 'No such food found. Please create a new one.';
 
                         // Fetch all foods from the database to display history
-                        fetch('get-data.php') // Create a separate PHP file to get all food
+                        fetch('get-data.php')
                             .then(response => response.json())
                             .then(allFoods => {
-                                updateFoodTable(allFoods); // Populate table with all food
+                                updateFoodTable(allFoods);
                             })
                             .catch(console.error);
                     }
@@ -227,13 +221,11 @@ if ($result->num_rows > 0) {
                 .catch(console.error);
         });
 
-        // Add this inside the delegate event listener for the "Add Food" button
+        // Dynamically added "Add Food" button
         document.addEventListener('click', function(e) {
             if (e.target.classList.contains('add-food-btn')) {
-                // Parse the data-food JSON string
                 const foodData = JSON.parse(e.target.getAttribute('data-food'));
 
-                // Now you can access the values directly
                 const foodName = foodData.name;
                 const foodCalo = foodData.calories;
                 const foodAmount = foodData.amount;
@@ -242,7 +234,6 @@ if ($result->num_rows > 0) {
                 // Get the selected meal type
                 const mealType = dropdown.value;
 
-                // Prepare the data to send to the log food page
                 const logData = {
                     food_name: foodName,
                     food_calories: foodCalo,
@@ -254,7 +245,6 @@ if ($result->num_rows > 0) {
                 loggedFoods.push(logData);
                 localStorage.setItem('loggedFoods', JSON.stringify(loggedFoods));
 
-                // Use Ajax to send the localStorage data to the server
                 fetch('log-food-dashboard.php', {
                     method: 'POST',
                     headers: {

@@ -6,7 +6,7 @@ include 'db.php';
 $loggedFoods = isset($_SESSION['loggedFoods']) ? $_SESSION['loggedFoods'] : [];
 $loggedExercises = isset($_SESSION['loggedExercises']) ? $_SESSION['loggedExercises'] : [];
 
-// Categorization logic based on food names
+// Categorization logic based on food names or exercises
 $breakfastFoods = isset($_SESSION['breakfastFoods']) ? $_SESSION['breakfastFoods'] : [];
 $lunchFoods = isset($_SESSION['lunchFoods']) ? $_SESSION['lunchFoods'] : [];
 $dinnerFoods = isset($_SESSION['dinnerFoods']) ? $_SESSION['dinnerFoods'] : [];
@@ -339,7 +339,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </section>
     </main>
 
-    <!-- Footer -->
     <footer>
         <p>&copy; 2024 EatingHabitPal. All rights reserved.</p>
     </footer>
