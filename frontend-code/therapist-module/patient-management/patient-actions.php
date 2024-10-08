@@ -1,4 +1,5 @@
 <?php
+
 require_once "../../common/inc/dbconn.inc.php";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -7,31 +8,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Add new patient
     if ($action === 'addPatient') {
         $name = $_POST['name'] ?? '';
+        $gender = $_POST['gender'] ?? '';
+        $age = $_POST['age'] ?? null;
+        $height = $_POST['height'] ?? null;
+        $weight = $_POST['weight'] ?? null;
         $status = $_POST['status'] ?? '';
         $groupId = $_POST['group_id'] ?? null;
-    
-        // Check if all required fields are present
+
         if ($name && $status && $groupId !== null) {
-            $sql = "INSERT INTO patients (name, status, patient_group) VALUES (?, ?, ?)";
+            $sql = "INSERT INTO patients (name, gender, age, height, weight, status, patient_group) 
+                    VALUES (?, ?, ?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($sql);
-    
             if ($stmt) {
-                // Binding parameters and executing statement
-                $stmt->bind_param("ssi", $name, $status, $groupId);
+                $stmt->bind_param("ssiddsi", $name, $gender, $age, $height, $weight, $status, $groupId);
                 if ($stmt->execute()) {
                     echo json_encode(['status' => 'success', 'message' => 'Patient added successfully.']);
                 } else {
-                    // Output SQL error for debugging purposes
                     echo json_encode(['status' => 'error', 'message' => 'Error executing query: ' . $stmt->error]);
                 }
                 $stmt->close();
             } else {
-                // Output error related to the prepare statement
                 echo json_encode(['status' => 'error', 'message' => 'Failed to prepare statement: ' . $conn->error]);
             }
         } else {
-            // Missing data validation
-            echo json_encode(['status' => 'error', 'message' => 'Invalid input: name, status, and group are required.']);
+            echo json_encode(['status' => 'error', 'message' => 'Invalid input: all required fields are not provided.']);
         }
     }
     // Edit existing patient

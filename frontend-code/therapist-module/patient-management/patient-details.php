@@ -1,3 +1,44 @@
+<?php
+
+ini_set('display_errors', 1); // Ensure that errors are shown
+ini_set('display_startup_errors', 1); // Show errors that occur during PHP startup
+error_reporting(E_ALL); // Report all types of errors
+
+require_once "../../common/inc/dbconn.inc.php";
+
+// Get patient_id from the URL
+$patientId = isset($_GET['id']) ? intval($_GET['id']) : 0;
+
+if ($patientId) {
+    // Fetch patient details
+    $sql = "SELECT p.name, p.gender, p.age, p.height, p.weight, g.name as group_name 
+            FROM patients p 
+            LEFT JOIN groups g ON p.patient_group = g.id 
+            WHERE p.id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $patientId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $patient = $result->fetch_assoc();
+
+    // Fetch therapist notes for the patient
+    $notesSql = "SELECT note FROM notes WHERE patient_id = ?";
+    $notesStmt = $conn->prepare($notesSql);
+    $notesStmt->bind_param("i", $patientId);
+    $notesStmt->execute();
+    $notesResult = $notesStmt->get_result();
+    $notes = $notesResult->fetch_all(MYSQLI_ASSOC);
+
+    $stmt->close();
+    $notesStmt->close();
+    $conn->close();
+} else {
+    // Handle case where no valid patient ID is provided
+    echo "No valid patient ID provided.";
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,13 +55,14 @@
     <section id="patient-info">
         <div class="column avatar-name">
             <img src="../../common/assets/images/patient_icon.png" alt="Patient Avatar" class="avatar">
-            <h2>John Doe</h2>
+            <h2><?php echo htmlspecialchars($patient['name'] ?? 'Unknown'); ?></h2>
         </div>
         <div class="column patient-details">
-            <p><strong>Gender:</strong> Male</p>
-            <p><strong>Age:</strong> 32</p>
-            <p><strong>Height:</strong> 180 cm</p>
-            <p><strong>Weight:</strong> 75 kg</p>
+            <p><strong>Gender:</strong> <?php echo htmlspecialchars($patient['gender'] ?? 'N/A'); ?></p>
+            <p><strong>Age:</strong> <?php echo htmlspecialchars($patient['age'] ?? 'N/A'); ?></p>
+            <p><strong>Height:</strong> <?php echo htmlspecialchars($patient['height'] ?? 'N/A'); ?> cm</p>
+            <p><strong>Weight:</strong> <?php echo htmlspecialchars($patient['weight'] ?? 'N/A'); ?> kg</p>
+            <p><strong>Group:</strong> <?php echo htmlspecialchars($patient['group_name'] ?? 'N/A'); ?></p>
         </div>
         <div class="column action-buttons">
             <button onclick="editPatient()">Edit</button>
@@ -63,22 +105,16 @@
     <section id="therapist-notes">
         <h3 class="section-title">Therapist Notes</h3>
         <hr>
-        <div class="note-card sticky-note">
-            <h4>Note 1</h4>
-            <p class="note-content">Observed improvement in anxiety levels. Recommend continuing therapy sessions twice a week. <span class="more">...more</span></p>
-        </div>
-        <div class="note-card sticky-note">
-            <h4>Note 2</h4>
-            <p class="note-content">Patient responded well to mindfulness exercises, showing positive attitude after sessions. <span class="more">...more</span></p>
-        </div>
-        <div class="note-card sticky-note">
-            <h4>Note 3</h4>
-            <p class="note-content">Discussed treatment plan with the patient, agreed on following a structured regimen.</p>
-        </div>
-        <div class="note-card sticky-note">
-            <h4>Note 4</h4>
-            <p class="note-content">Follow-up session is required to evaluate mental health status after recent life changes.</p>
-        </div>
+        <?php if (!empty($notes)): ?>
+            <?php foreach ($notes as $note): ?>
+            <div class="note-card sticky-note">
+                <h4>Therapist Note</h4>
+                <p class="note-content"><?php echo htmlspecialchars($note['note']); ?></p>
+            </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>No notes available for this patient.</p>
+        <?php endif; ?>
     </section>
 
     <!-- Add Note Modal -->

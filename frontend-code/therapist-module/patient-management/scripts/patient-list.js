@@ -2,35 +2,25 @@
 window.onload = function () {
     const urlParams = new URLSearchParams(window.location.search);
     const groupFilter = urlParams.get('group') || 'all';
-    const fromGroupManagement = urlParams.get('from') === 'group-management';
+    const sortFilter = urlParams.get('sort') || 'name';
 
-    // Display return button if from Group Management page
-    if (fromGroupManagement) {
-        document.getElementById('return-button').style.display = 'inline-block';
-    }
-
+    // Apply the group filter
     document.getElementById('group-filter').value = groupFilter;
+    document.getElementById('sort-options').value = sortFilter;
 };
 
-// Filter patients when the group filter is changed
+// Filter patients based on selected group
 function filterPatients() {
     const selectedGroup = document.getElementById('group-filter').value;
-    window.location.href = `patient-list.php?group=${selectedGroup}`;
+    const selectedSort = document.getElementById('sort-options').value;
+    window.location.href = `patient-list.php?group=${selectedGroup}&sort=${selectedSort}`;
 }
 
 // Sort patients based on the selected option
 function sortPatients() {
-    const table = document.getElementById("patient-table");
-    const rows = Array.from(table.rows).slice(1); // Ignore the header row
-    const sortBy = document.getElementById('sort-options').value;
-
-    rows.sort((rowA, rowB) => {
-        const cellA = rowA.querySelector(`td:nth-child(${getSortIndex(sortBy)})`).innerText;
-        const cellB = rowB.querySelector(`td:nth-child(${getSortIndex(sortBy)})`).innerText;
-        return cellA.localeCompare(cellB);
-    });
-
-    rows.forEach(row => table.appendChild(row)); // Reattach rows in sorted order
+    const selectedSort = document.getElementById('sort-options').value;
+    const selectedGroup = document.getElementById('group-filter').value;
+    window.location.href = `patient-list.php?group=${selectedGroup}&sort=${selectedSort}`;
 }
 
 function getSortIndex(sortBy) {
@@ -68,11 +58,14 @@ function openEditPatientModal(patientId) {
 
     document.getElementById('patient-modal').style.display = 'block';
 }
-
 // Function to save patient info (add/edit)
 function savePatient() {
     const patientId = document.getElementById('patient-id').value;
     const patientName = document.getElementById('patient-name').value;
+    const patientGender = document.getElementById('patient-gender').value;
+    const patientAge = document.getElementById('patient-age').value;
+    const patientHeight = document.getElementById('patient-height').value;
+    const patientWeight = document.getElementById('patient-weight').value;
     const patientStatus = document.getElementById('patient-status').value;
     const patientGroup = document.getElementById('patient-group').value;
 
@@ -80,6 +73,10 @@ function savePatient() {
     formData.append('action', patientId ? 'editPatient' : 'addPatient');
     formData.append('patient_id', patientId);
     formData.append('name', patientName);
+    formData.append('gender', patientGender);
+    formData.append('age', patientAge);
+    formData.append('height', patientHeight);
+    formData.append('weight', patientWeight);
     formData.append('status', patientStatus);
     formData.append('group_id', patientGroup);
 
@@ -95,7 +92,6 @@ function savePatient() {
     })
     .catch(error => console.error('Error:', error));
 }
-
 // Function to close modals
 function closeModal(modalId) {
     document.getElementById(modalId).style.display = 'none';
@@ -114,8 +110,8 @@ function displayNotification(message) {
 }
 
 // Function to view a patient
-function viewPatient(name) {
-    window.location.href = `../patient-management/patient-details.php?id=${encodeURIComponent(name)}`;
+function viewPatient(id) {
+    window.location.href = `../patient-management/patient-details.php?id=${encodeURIComponent(id)}`;
 }
 
 // Function to go back to Group Management

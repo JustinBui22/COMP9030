@@ -12,17 +12,16 @@ $sql = "SELECT p.id, p.name, p.status, g.name AS group_name
 // Apply group filter if selected
 if ($groupFilter !== 'all') {
     $sql .= " WHERE p.patient_group = ?";
-}
-
-$stmt = $conn->prepare($sql);
-
-if ($groupFilter !== 'all') {
+    $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $groupFilter); // Bind the group filter
+} else {
+    $stmt = $conn->prepare($sql); // Prepare without parameters
 }
 
 $stmt->execute();
 $result = $stmt->get_result();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,7 +59,6 @@ $result = $stmt->get_result();
         </select>
 
         <button onclick="openAddPatientModal()">Add Patient</button>
-        <button onclick="exportPatients()">Export List</button>
     </div>
 
     <!-- Patient Table -->
@@ -87,7 +85,6 @@ $result = $stmt->get_result();
             <?php } ?>
         </tbody>
     </table>
-
     <!-- Add/Edit Patient Modal -->
     <div id="patient-modal" class="modal">
         <div class="modal-content">
@@ -96,12 +93,31 @@ $result = $stmt->get_result();
             <form id="patient-form">
                 <input type="hidden" id="patient-id" value="">
                 <label for="patient-name">Name:</label>
-                <input type="text" id="patient-name" value="">
+                <input type="text" id="patient-name" value="" required>
+
+                <label for="patient-gender">Gender:</label>
+                <select id="patient-gender">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <label for="patient-age">Age:</label>
+                <input type="number" id="patient-age" value="" min="0" max="120" required>
+
+                <label for="patient-height">Height (cm):</label>
+                <input type="number" id="patient-height" value="" step="0.1">
+
+                <label for="patient-weight">Weight (kg):</label>
+                <input type="number" id="patient-weight" value="" step="0.1">
+
                 <label for="patient-status">Status:</label>
                 <select id="patient-status">
                     <option value="Active">Active</option>
                     <option value="Inactive">Inactive</option>
+                    <option value="Discharged">Discharged</option>
                 </select>
+
                 <label for="patient-group">Group:</label>
                 <select id="patient-group">
                     <?php
@@ -112,6 +128,7 @@ $result = $stmt->get_result();
                     }
                     ?>
                 </select>
+
                 <button type="button" onclick="savePatient()">Save</button>
             </form>
         </div>

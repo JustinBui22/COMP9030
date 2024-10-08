@@ -122,3 +122,11 @@ CREATE TABLE journal_entries (
     mood VARCHAR(50),
     mood_notes TEXT
 );
+
+CREATE TABLE notes (
+                       id INT AUTO_INCREMENT PRIMARY KEY,
+                       patient_id INT NOT NULL,
+                       note TEXT NOT NULL,
+                       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                       FOREIGN KEY (patient_id) REFERENCES patients(id) ON DELETE CASCADE
+);

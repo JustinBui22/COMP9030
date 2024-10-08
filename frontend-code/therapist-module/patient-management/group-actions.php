@@ -42,7 +42,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->execute();
 
         echo json_encode(['status' => 'success', 'message' => 'Schedule added successfully.']);
+    } elseif  ($action === 'addGroup')  // Add Group
+      {
+        $groupName = $_POST['group_name'];
+        $groupDesc = $_POST['group_desc'];
+        $groupStatus = $_POST['group_status'];
+
+        if (!empty($groupName)) {
+            // Insert the group into the database
+            $sql = "INSERT INTO groups (name, description, status) VALUES (?, ?, ?)";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("sss", $groupName, $groupDesc, $groupStatus);
+
+            if ($stmt->execute()) {
+                echo json_encode(['status' => 'success', 'message' => 'Group added successfully.']);
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'Error adding group: ' . $stmt->error]);
+            }
+            $stmt->close();
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Group name is required.']);
+        }
     }
+
 } elseif ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['group_id'])) {
     // Fetch group details
     $groupId = $_GET['group_id'];

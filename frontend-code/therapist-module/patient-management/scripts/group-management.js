@@ -119,3 +119,44 @@ function saveSchedule() {
     .catch(error => console.error('Error:', error));
 }
 
+// Open the Add Group Modal
+function openAddGroupModal() {
+    document.getElementById('add-group-modal').style.display = 'block';
+}
+
+// Close Modal function (used for all modals)
+function closeModal(modalId) {
+    document.getElementById(modalId).style.display = 'none';
+}
+
+// Function to add a group
+function addGroup() {
+    const groupName = document.getElementById('group-name-add').value;
+    const groupDesc = document.getElementById('group-desc-add').value;
+    const groupStatus = document.getElementById('group-status-add').value;
+
+    // Validate the form data (add more validation if necessary)
+    if (groupName.trim() === '') {
+        alert('Please provide a valid group name.');
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append('action', 'addGroup');
+    formData.append('group_name', groupName);
+    formData.append('group_desc', groupDesc);
+    formData.append('group_status', groupStatus);
+
+    fetch('group-actions.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+        closeModal('add-group-modal');
+        window.location.reload();  // Reload the page to refresh the group list
+    })
+    .catch(error => console.error('Error:', error));
+}
+

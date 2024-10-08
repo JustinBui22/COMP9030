@@ -48,6 +48,40 @@ function goBack() {
     window.history.back();
 }
 
+// Function to get query parameters from the URL
+function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+}
+
+// Save note functionality
+function saveNote() {
+    const noteContent = document.getElementById('noteContent').value;
+    const patientId = getQueryParam('id');  // Get patient ID from the URL
+
+    if (noteContent) {
+        fetch('add_note.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ patientId: patientId, noteContent: noteContent })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                alert('Note added successfully!');
+                closeAddNoteModal();
+                location.reload(); // Reload page to reflect new note
+            } else {
+                alert('Error: ' + data.message);
+            }
+        });
+    } else {
+        alert('Please enter a note.');
+    }
+}
+
 // Function to open the Add Note modal
 function openAddNoteModal() {
     document.getElementById('addNoteModal').style.display = 'block';
@@ -56,15 +90,4 @@ function openAddNoteModal() {
 // Function to close the Add Note modal
 function closeAddNoteModal() {
     document.getElementById('addNoteModal').style.display = 'none';
-}
-
-// Function to save the note (simple alert for now)
-function saveNote() {
-    const noteContent = document.getElementById('noteContent').value;
-    if (noteContent) {
-        alert("Note saved: " + noteContent);
-        closeAddNoteModal(); // Close the modal after saving
-    } else {
-        alert("Please enter a note.");
-    }
 }
