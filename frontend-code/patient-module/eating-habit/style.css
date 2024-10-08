@@ -1,0 +1,237 @@
+/* General reset for padding and margin */
+body,
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #333;
+    padding: 10px 20px;
+}
+
+.logo h1 {
+    color: rgb(255, 255, 255);
+    margin: 0;
+}
+
+.nav-links {
+    display: grid;
+    grid-template-columns: repeat(7, auto);
+    list-style-type: none;
+    gap: 10px;
+    /* Space between each link */
+}
+
+.nav-links li {
+    display: inline;
+    /* Ensures that list items are displayed inline */
+    align-items: center;
+}
+
+.nav-links a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    padding: 10px 15px;
+}
+
+.nav-links a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    /* Hover effect for links */
+}
+
+/* Styling for dashboard */
+.dashboard {
+    margin: 20px;
+}
+
+.big-heading {
+    font-size: 50px; 
+    font-weight: bold; 
+    text-align: center; 
+    margin: 20px 0; 
+}
+
+/* Styling for search bar */
+.search-bar {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    /* Stack elements vertically */
+}
+
+.search-bar input[type="search"],
+.search-bar input[type="text"],
+.search-bar input[type="number"],
+.search-bar input[type="submit"] {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    /* Rounded corners for inputs */
+}
+
+.nutrient-info {
+    margin-top: 20px;
+}
+
+.add-items-tables {
+    width: 100%;
+    border-collapse: collapse;
+    /* Collapse borders */
+}
+
+.add-items-tables th,
+.add-items-tables td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+    /* Light border for table cells */
+}
+
+.complete-day-dairy-container {
+    margin-top: 20px;
+    display: flex;
+    /* Use flexbox for centering */
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    /* Center vertically */
+
+}
+
+.complete-day-dairy-button {
+    padding: 15px 30px;
+    /* Increase padding for larger button */
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    /* Increase font size */
+    border-radius: 5px;
+    /* Optional: Add rounded corners */
+    cursor: pointer;
+    /* Cursor change on hover */
+}
+
+.complete-day-dairy-button:hover {
+    background-color: #555;
+    /* Darker background on hover */
+}
+
+/* Footer styling */
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    /* White text color */
+}
+
+.search-results-message {
+    color: red;
+    /* Message color for search results */
+}
+
+
+/* Embedding only essential styles directly into the PHP file */
+body,
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #333;
+    padding: 10px 20px;
+}
+
+.logo h1 {
+    color: rgb(255, 255, 255);
+    margin: 0;
+}
+
+.nav-links {
+    display: grid;
+    grid-template-columns: repeat(7, auto);
+    list-style-type: none;
+    gap: 10px;
+}
+
+.nav-links li {
+    display: inline;
+    align-items: center;
+}
+
+.nav-links a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.nav-links a:hover {
+    background-color: #575757;
+    text-decoration: underline;
+}
+
+/* Styling for Food and Exercise Tables */
+.nutrient-info h3,
+.exercise-info h3 {
+    font-size: 25px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    text-decoration: underline;
+}
+
+.calories-tables {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    /* Add some space between tables */
+}
+
+.calories-tables th,
+.calories-tables td {
+    padding: 8px 12px;
+    border: 1px solid #000000;
+}
+
+.calories-tables th {
+    color: #fff;
+    background-color: #444242;
+    font-size: 22px;
+}
+
+.calories-tables td {
+    color: #050505;
+    font-size: 17px;
+    text-align: center;
+}
+
+.add-food-button {
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #444242;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    /* Ensure button is displayed as a block */
+}
+
+.add-food-button:hover {
+    background-color: #000000;
+    /* Darker green on hover */
+}

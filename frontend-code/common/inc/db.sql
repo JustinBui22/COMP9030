@@ -130,3 +130,21 @@ CREATE TABLE notes (
                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                        FOREIGN KEY (patient_id) REFERENCES patients(id) ON DELETE CASCADE
 );
+
+CREATE TABLE food_info
+(
+    food_id     INT auto_increment
+        PRIMARY KEY,
+    food_name   VARCHAR(150) not null,
+    food_calo   INT         not null,
+    food_amount INT         not null
+);
+
+CREATE TABLE exercises
+(
+    ex_id       INT auto_increment
+        PRIMARY KEY,
+    ex_name     VARCHAR(150) not null,
+    ex_calo     INT         not null,
+    ex_duration INT         not null
+);
