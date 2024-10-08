@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'db.php';
+
 
 // Retrieve logged foods from session or initialize an array
 $loggedFoods = isset($_SESSION['loggedFoods']) ? $_SESSION['loggedFoods'] : [];
@@ -17,8 +17,21 @@ $exercises = isset($_SESSION['exercises']) ? $_SESSION['exercises'] : [];
 // Check if there's POST data
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    // Handle deletion of food or exercise
-    if (isset($_POST['delete_type']) && isset($_POST['delete_index'])) {
+    // Handle deletion of all foods and exercises
+    if (isset($_POST['delete_all'])) {
+        // Clear session data for foods and exercises
+        unset($_SESSION['loggedFoods']);
+        unset($_SESSION['loggedExercises']);
+        unset($_SESSION['breakfastFoods']);
+        unset($_SESSION['lunchFoods']);
+        unset($_SESSION['dinnerFoods']);
+        unset($_SESSION['snackFoods']);
+        unset($_SESSION['exercises']);
+
+        header("Location: " . $_SERVER['PHP_SELF']);
+        exit;
+    } elseif (isset($_POST['delete_type']) && isset($_POST['delete_index'])) {
+        // Handle deletion of food or exercise
         $deleteType = $_POST['delete_type'];
         $deleteIndex = intval($_POST['delete_index']);
 
@@ -54,63 +67,53 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 }
                 break;
         }
-    }
-    $data = json_decode(file_get_contents('php://input'), true);
+    } else {
+        $data = json_decode(file_get_contents('php://input'), true);
 
-    if (isset($data['loggedFoods'])) {
-        $loggedFoodsFromAddFood = $data['loggedFoods'];
-        $lastIndex = count($loggedFoodsFromAddFood) - 1;
-        $loggedFoods = $loggedFoodsFromAddFood[$lastIndex];
+        if (isset($data['loggedFoods'])) {
+            $loggedFoodsFromAddFood = $data['loggedFoods'];
+            $lastIndex = count($loggedFoodsFromAddFood) - 1;
+            $loggedFoods = $loggedFoodsFromAddFood[$lastIndex];
 
-        if (isset($loggedFoods)) {
-            switch ($loggedFoods['meal_type']) {
-                case 'breakfast':
-                    $breakfastFoods[] = $loggedFoods;
-                    break;
-                case 'lunch':
-                    $lunchFoods[] = $loggedFoods;
-                    break;
-                case 'dinner':
-                    $dinnerFoods[] = $loggedFoods;
-                    break;
-                case 'snack':
-                    $snackFoods[] = $loggedFoods;
-                    break;
+            if (isset($loggedFoods)) {
+                switch ($loggedFoods['meal_type']) {
+                    case 'breakfast':
+                        $breakfastFoods[] = $loggedFoods;
+                        break;
+                    case 'lunch':
+                        $lunchFoods[] = $loggedFoods;
+                        break;
+                    case 'dinner':
+                        $dinnerFoods[] = $loggedFoods;
+                        break;
+                    case 'snack':
+                        $snackFoods[] = $loggedFoods;
+                        break;
+                }
             }
         }
-    }
 
-    if (isset($data['loggedExercies'])) {
-        $loggedExercisesFromAddExercise = $data['loggedExercies'];
-        $lastIndex = count($loggedExercisesFromAddExercise) - 1;
-        $loggedExercises = $loggedExercisesFromAddExercise[$lastIndex];
+        if (isset($data['loggedExercies'])) {
+            $loggedExercisesFromAddExercise = $data['loggedExercies'];
+            $lastIndex = count($loggedExercisesFromAddExercise) - 1;
+            $loggedExercises = $loggedExercisesFromAddExercise[$lastIndex];
 
-        if (isset($loggedExercises)) {
-            $exercises[] =  $loggedExercises;
+            if (isset($loggedExercises)) {
+                $exercises[] =  $loggedExercises;
+            }
         }
+
+        // Save updated logged foods back to the session
+        $_SESSION['loggedFoods'] = isset($loggedFoodsFromAddFood) ? $loggedFoodsFromAddFood : [];
+        $_SESSION['loggedExercises'] = isset($loggedExercisesFromAddExercise) ? $loggedExercisesFromAddExercise : [];
+
+        $_SESSION['breakfastFoods'] = $breakfastFoods;
+        $_SESSION['lunchFoods'] = $lunchFoods;
+        $_SESSION['dinnerFoods'] = $dinnerFoods;
+        $_SESSION['snackFoods'] = $snackFoods;
+
+        $_SESSION['exercises'] = $exercises;
     }
-
-
-    // Save updated logged foods back to the session
-    $_SESSION['loggedFoods'] = isset($loggedFoodsFromAddFood) ? $loggedFoodsFromAddFood : [];
-    $_SESSION['loggedExercises'] = isset($loggedExercisesFromAddExercise) ? $loggedExercisesFromAddExercise : [];
-
-    $_SESSION['breakfastFoods'] = $breakfastFoods;
-    $_SESSION['lunchFoods'] = $lunchFoods;
-    $_SESSION['dinnerFoods'] = $dinnerFoods;
-    $_SESSION['snackFoods'] = $snackFoods;
-
-    $_SESSION['exercises'] = $exercises;
-
-    // unset($_SESSION['loggedFoods']);
-    // unset($_SESSION['loggedExercises']);
-
-    // unset($_SESSION['breakfastFoods']);
-    // unset($_SESSION['lunchFoods']);
-    // unset($_SESSION['dinnerFoods']);
-    // unset($_SESSION['snackFoods']);
-
-    // unset($_SESSION['exercises']);
 }
 ?>
 
@@ -334,6 +337,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </tbody>
                 </table>
                 <a href="add-exercise-dashboard.php" class="add-food-button">Add Exercise</a>
+            </div>
+            <div class="center-button">
+                <form method="POST">
+                    <button type="submit" name="delete_all" class="add-food-button">Delete All Logged Datas</button>
+                </form>
             </div>
 
         </section>

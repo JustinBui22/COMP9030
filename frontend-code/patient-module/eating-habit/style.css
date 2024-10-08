@@ -1,4 +1,3 @@
-/* General reset for padding and margin */
 body,
 ul {
     margin: 0;
@@ -23,12 +22,10 @@ ul {
     grid-template-columns: repeat(7, auto);
     list-style-type: none;
     gap: 10px;
-    /* Space between each link */
 }
 
 .nav-links li {
     display: inline;
-    /* Ensures that list items are displayed inline */
     align-items: center;
 }
 
@@ -81,7 +78,6 @@ ul {
 .add-items-tables {
     width: 100%;
     border-collapse: collapse;
-    /* Collapse borders */
 }
 
 .add-items-tables th,
@@ -89,38 +85,29 @@ ul {
     padding: 10px;
     text-align: left;
     border: 1px solid #ddd;
-    /* Light border for table cells */
 }
 
 .complete-day-dairy-container {
     margin-top: 20px;
     display: flex;
-    /* Use flexbox for centering */
     justify-content: center;
-    /* Center horizontally */
     align-items: center;
-    /* Center vertically */
 
 }
 
 .complete-day-dairy-button {
     padding: 15px 30px;
-    /* Increase padding for larger button */
     background-color: #333;
     color: #fff;
     border: none;
     cursor: pointer;
     font-size: 20px;
-    /* Increase font size */
     border-radius: 5px;
-    /* Optional: Add rounded corners */
     cursor: pointer;
-    /* Cursor change on hover */
 }
 
 .complete-day-dairy-button:hover {
     background-color: #555;
-    /* Darker background on hover */
 }
 
 /* Footer styling */
@@ -129,16 +116,12 @@ footer {
     padding: 10px;
     background-color: #333;
     color: white;
-    /* White text color */
 }
 
 .search-results-message {
     color: red;
-    /* Message color for search results */
 }
 
-
-/* Embedding only essential styles directly into the PHP file */
 body,
 ul {
     margin: 0;
@@ -228,10 +211,15 @@ ul {
     cursor: pointer;
     text-align: center;
     display: inline-block;
-    /* Ensure button is displayed as a block */
 }
 
 .add-food-button:hover {
     background-color: #000000;
-    /* Darker green on hover */
+}
+
+.center-button {
+    display: flex;               
+    justify-content: center;     
+    align-items: center;        
+    height: 10vh;               
 }
