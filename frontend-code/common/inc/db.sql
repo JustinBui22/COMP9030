@@ -19,6 +19,26 @@ CREATE TABLE account (
     update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
+CREATE TABLE patient_detail ( 
+    patient_id INT(11) NOT NULL,
+    date DATE NOT NULL,
+    weekly_activities TEXT NOT NULL,
+    activities_for_week TEXT NOT NULL,
+    goals TEXT NOT NULL,
+    daily_affirmations TEXT NOT NULL,
+    PRIMARY KEY (patient_id, date),
+    FOREIGN KEY (patient_id) REFERENCES patients(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS affirmations (
+    affirmation_id INT AUTO_INCREMENT PRIMARY KEY,
+    patient_id INT NOT NULL,
+    affirmation_date DATE NOT NULL,
+    affirmation TEXT,
+    FOREIGN KEY (patient_id) REFERENCES patients(id) -- "patients(patient_id)" should change to patients(id)"
+);
+
+
 CREATE TABLE therapists (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
