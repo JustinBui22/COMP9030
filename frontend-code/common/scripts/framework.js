@@ -23,7 +23,7 @@ function loadContentBasedOnRole() {
             <li><a href="../patient-module/dashboard/Patient.php" target="content-frame" data-initial="J">Exercise Tracker</a></li>
             <li><a href="../patient-module/journal-entry/journalentry_page.html" target="content-frame" data-initial="J">Journal Entry</a></li>
             <li><a href="../patient-module/sleep-tracking/Home-Page/Home.html" target="content-frame" data-initial="S">Sleep Tracking</a></li>
-            <li><a href="../patient-module/eating-habit/home.html" target="content-frame" data-initial="E">Eating Habit</a></li>
+            <li><a href="../patient-module/eating-habit/log-food-dashboard.php" target="content-frame" data-initial="E">Eating Habit</a></li>
         `;
 		// Load patient dashboard or appropriate content
 		contentFrame.src = '../patient-module/dashboard/Dashboard.html';
