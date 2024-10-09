@@ -26,16 +26,14 @@ CREATE TABLE patient_detail (
     activities_for_week TEXT NOT NULL,
     goals TEXT NOT NULL,
     daily_affirmations TEXT NOT NULL,
-    PRIMARY KEY (patient_id, date),
-    FOREIGN KEY (patient_id) REFERENCES patients(id) ON DELETE CASCADE
+    PRIMARY KEY (patient_id, date)
 );
 
 CREATE TABLE IF NOT EXISTS affirmations (
     affirmation_id INT AUTO_INCREMENT PRIMARY KEY,
     patient_id INT NOT NULL,
     affirmation_date DATE NOT NULL,
-    affirmation TEXT,
-    FOREIGN KEY (patient_id) REFERENCES patients(id) -- "patients(patient_id)" should change to patients(id)"
+    affirmation TEXT
 );
 
 
