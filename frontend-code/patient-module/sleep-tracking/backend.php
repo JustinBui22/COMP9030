@@ -1,6 +1,8 @@
 <?php
+
+
 header('Content-Type: application/json');
-$pdo = new PDO('mysql:host=localhost;dbname=sleep_tracker', 'root', '');
+require_once "../../common/inc/dbconn.inc.php";
 
 
 // Check if the request is POST and the action parameter is set
@@ -10,19 +12,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 	// Call the appropriate function based on the action
 	switch ($action) {
 		case 'save_sleep_entry':
-			saveSleepEntry($pdo);
+			saveSleepEntry($conn);
 			break;
 
 			// Add more cases here for different functions, e.g.:
 		case 'getSleepData':
-			getSleepData($pdo);
+			getSleepData($conn);
 			break;
 		case 'update_sleep_entry':
-			updateSleepEntry($pdo);
+			updateSleepEntry($conn);
 			break;
 
 		case 'delete_sleep_entry':
-			deleteSleepEntry($pdo);
+			deleteSleepEntry($conn);
 			break;
 
 
@@ -36,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 }
 
 // Function to save a sleep entry
-function saveSleepEntry($pdo)
+function saveSleepEntry($conn)
 {
 	try {
 		$date = $_POST['date'];
@@ -48,7 +50,7 @@ function saveSleepEntry($pdo)
 		// Validate the inputs
 		if (!empty($date) && is_numeric($hours) && is_numeric($minutes)) {
 			// Check if the date already exists
-			$stmt = $pdo->prepare("SELECT COUNT(*) FROM sleep_diary WHERE date = ?");
+			$stmt = $conn->prepare("SELECT COUNT(*) FROM sleep_diary WHERE date = ?");
 			$stmt->execute([$date]);
 			$count = $stmt->fetchColumn();
 
@@ -58,7 +60,7 @@ function saveSleepEntry($pdo)
 			}
 
 			// Insert new entry
-			$stmt = $pdo->prepare("INSERT INTO sleep_diary (date, hours, minutes) VALUES (?, ?, ?)");
+			$stmt = $conn->prepare("INSERT INTO sleep_diary (date, hours, minutes) VALUES (?, ?, ?)");
 			$result = $stmt->execute([$date, $hours, $minutes]);
 
 			if ($result) {
@@ -77,12 +79,12 @@ function saveSleepEntry($pdo)
 }
 
 
-function getSleepData($pdo)
+function getSleepData($conn)
 {
 	header('Content-Type: application/json');
 	try {
 		// Query to retrieve the sleep data
-		$stmt = $pdo->prepare("SELECT date, hours, minutes FROM sleep_diary ORDER BY date ASC");
+		$stmt = $conn->prepare("SELECT date, hours, minutes FROM sleep_diary ORDER BY date ASC");
 		$stmt->execute();
 		$sleepData = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -117,7 +119,7 @@ function getSleepData($pdo)
 	}
 }
 
-function updateSleepEntry($pdo)
+function updateSleepEntry($conn)
 {
 	try {
 		$date = $_POST['date'];
@@ -127,7 +129,7 @@ function updateSleepEntry($pdo)
 		// Validate the inputs
 		if (!empty($date) && is_numeric($hours) && is_numeric($minutes)) {
 			// Update entry
-			$stmt = $pdo->prepare("UPDATE sleep_diary SET hours = ?, minutes = ? WHERE date = ?");
+			$stmt = $conn->prepare("UPDATE sleep_diary SET hours = ?, minutes = ? WHERE date = ?");
 			$result = $stmt->execute([$hours, $minutes, $date]);
 
 			if ($result) {
@@ -145,7 +147,7 @@ function updateSleepEntry($pdo)
 	}
 }
 
-function deleteSleepEntry($pdo)
+function deleteSleepEntry($conn)
 {
 	try {
 		$date = $_POST['date'];
@@ -153,7 +155,7 @@ function deleteSleepEntry($pdo)
 		// Validate the input
 		if (!empty($date)) {
 			// Delete entry
-			$stmt = $pdo->prepare("DELETE FROM sleep_diary WHERE date = ?");
+			$stmt = $conn->prepare("DELETE FROM sleep_diary WHERE date = ?");
 			$result = $stmt->execute([$date]);
 
 			if ($result) {
