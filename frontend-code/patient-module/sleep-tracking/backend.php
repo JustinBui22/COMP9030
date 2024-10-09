@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: application/json');
-$pdo = new PDO('mysql:host=localhost;dbname=sleep_tracker', 'root', '');
+$pdo = new PDO('mysql:host=localhost;dbname=comp9030', 'root', '');
 
 
 // Check if the request is POST and the action parameter is set
