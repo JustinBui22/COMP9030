@@ -45,7 +45,7 @@ $result = mysqli_query($conn, $sql);
             </div>
             <div class="group-footer">
                 <button onclick="openEditModal(<?php echo $row['id']; ?>)">Edit Info</button>
-                <button onclick="openAddMemberModal(<?php echo $row['id']; ?>)">Add Member</button>
+                <button onclick="openAddMemberModal('<?php echo $row['id']; ?>')">Add Member</button>
                 <button onclick="openViewModal(<?php echo $row['id']; ?>)">View Info</button>
                 <button onclick="openScheduleModal(<?php echo $row['id']; ?>)">Schedule Event</button>
             </div>
@@ -58,6 +58,21 @@ $result = mysqli_query($conn, $sql);
         <button class="add-group-btn" onclick="openAddGroupModal()">+ Add Group</button>
     </div>
 
+    <!-- Edit Group Modal -->
+    <div id="edit-info-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('edit-info-modal')">&times;</span>
+            <h3>Edit Group Information</h3>
+            <form id="edit-group-form">
+                <input type="hidden" id="group-id" value="">
+                <label for="group-name">Group Name:</label>
+                <input type="text" id="group-name" value="">
+                <label for="group-desc">Group Description:</label>
+                <textarea id="group-desc"></textarea>
+                <button type="button" onclick="saveGroupInfo()">Save</button>
+            </form>
+        </div>
+    </div>
     <!-- Add Group Modal -->
     <div id="add-group-modal" class="modal">
         <div class="modal-content">
@@ -77,6 +92,57 @@ $result = mysqli_query($conn, $sql);
                 </select>
 
                 <button type="button" onclick="addGroup()">Add Group</button>
+            </form>
+        </div>
+    </div>
+    <!-- Schedule Event Modal -->
+    <div id="schedule-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('schedule-modal')">&times;</span>
+            <h3>Schedule Event</h3>
+            <form id="schedule-event-form">
+                <input type="hidden" id="group-id-schedule" value="">
+                <label for="schedule-title">Title:</label>
+                <input type="text" id="schedule-title" placeholder="Event Title">
+                <label for="schedule-date">Date:</label>
+                <input type="date" id="schedule-date">
+                <label for="schedule-description">Description:</label>
+                <textarea id="schedule-description" placeholder="Event Details"></textarea>
+                <button type="button" onclick="saveSchedule()">Save</button>
+            </form>
+        </div>
+    </div>
+    <!-- View Group Modal -->
+    <div id="view-info-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('view-info-modal')">&times;</span>
+            <h3>View Group Information</h3>
+            <form>
+                <label for="group-name-view">Group Name:</label>
+                <input type="text" id="group-name-view" disabled>
+                <label for="group-desc-view">Group Description:</label>
+                <textarea id="group-desc-view" disabled></textarea>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Member Modal -->
+    <div id="add-member-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('add-member-modal')">&times;</span>
+            <h3>Add Member</h3>
+            <form id="add-member-form">
+                <input type="hidden" id="group-id-add" value="">
+                <label for="member-select">Select a patient:</label>
+                <select id="member-select">
+                    <?php
+                    $patients = mysqli_query($conn, "SELECT id, name FROM patients");
+                    while ($patient = mysqli_fetch_assoc($patients)) {
+                        echo "<option value='" . $patient['id'] . "'>" . $patient['name'] . "</option>";
+                    }
+                    ?>
+                </select>
+                <button type="button" onclick="addMember()">Add</button>
             </form>
         </div>
     </div>

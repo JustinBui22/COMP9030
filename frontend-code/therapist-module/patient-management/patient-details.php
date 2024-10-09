@@ -66,8 +66,8 @@ if ($patientId) {
         </div>
         <div class="column action-buttons">
             <button onclick="editPatient()">Edit</button>
-            <button onclick="changeGroup()">Change Group</button>
-            <button onclick="setGoal()">Set Goal</button>
+            <button onclick="changeGroup()" style="display: none;">Change Group</button>
+            <button onclick="setGoal()" style="display: none;">Set Goal</button>
             <button onclick="openAddNoteModal()">Add Note</button>
         </div>
     </section>
