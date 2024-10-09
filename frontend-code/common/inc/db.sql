@@ -146,3 +146,11 @@ CREATE TABLE exercises
     ex_calo     INT         not null,
     ex_duration INT         not null
 );
+
+CREATE TABLE sleep_diary (
+    id int auto_increment PRIMARY KEY,
+    date date,
+    hours int,
+    minutes int,
+    user_id VARCHAR(100)
+);
