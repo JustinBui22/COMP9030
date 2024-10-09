@@ -8,12 +8,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $calories = $_POST['calories'];
     $amount = $_POST['amount'];
 
-    $stmt = $conn->prepare("INSERT INTO Test.food_info (food_name, food_calo, food_amount) VALUES (?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO food_info (food_name, food_calo, food_amount) VALUES (?, ?, ?)");
     $stmt->bind_param("ssi", $foodInfo, $calories, $amount); // Removed meal type from binding
 
     // Execute the SQL statement and fetch the updated list of foods
     if ($stmt->execute()) {
-        $result = $conn->query("SELECT * FROM Test.food_info");
+        $result = $conn->query("SELECT * FROM food_info");
         $foodInfo = $result->fetch_all(MYSQLI_ASSOC);
         echo json_encode($foodInfo);
     } else {
@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 // Retrieve all food from the database
-$result = $conn->query("SELECT * FROM Test.food_info");
+$result = $conn->query("SELECT * FROM food_info");
 $foodInfo = [];
 
 if ($result->num_rows > 0) {
@@ -98,7 +98,7 @@ if ($result->num_rows > 0) {
                     <tbody id="foodBody">
                         <?php
                         // Retrieve foods from the database
-                        $result = $conn->query("SELECT * FROM Test.food_info");
+                        $result = $conn->query("SELECT * FROM food_info");
 
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {

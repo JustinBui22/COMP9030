@@ -8,12 +8,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $calories = $_POST['calories'];
     $duration = $_POST['duration'];
 
-    $stmt = $conn->prepare("INSERT INTO Test.exercises (ex_name, ex_calo, ex_duration) VALUES (?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO exercises (ex_name, ex_calo, ex_duration) VALUES (?, ?, ?)");
     $stmt->bind_param("sii", $exercise, $calories, $duration);
 
     // Execute the SQL statement and fetch the updated list of exercises
     if ($stmt->execute()) {
-        $result = $conn->query("SELECT * FROM Test.exercises");
+        $result = $conn->query("SELECT * FROM exercises");
         $exercises = $result->fetch_all(MYSQLI_ASSOC);
         echo json_encode($exercises);
     } else {
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 // Retrieve all exercises from the database
-$result = $conn->query("SELECT * FROM Test.exercises");
+$result = $conn->query("SELECT * FROM exercises");
 $exercises = [];
 
 if ($result->num_rows > 0) {
@@ -97,7 +97,7 @@ if ($result->num_rows > 0) {
                     <tbody id="exerciseBody">
                         <?php
                         // Retrieve exercises from the database
-                        $result = $conn->query("SELECT * FROM Test.exercises");
+                        $result = $conn->query("SELECT * FROM exercises");
 
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {

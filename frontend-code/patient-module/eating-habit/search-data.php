@@ -8,9 +8,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     // Based on the type
     if ($type === 'exercise') {
-        $stmt = $conn->prepare("SELECT * FROM Test.exercises WHERE ex_name LIKE ?");
+        $stmt = $conn->prepare("SELECT * FROM exercises WHERE ex_name LIKE ?");
     } elseif ($type === 'food') {
-        $stmt = $conn->prepare("SELECT * FROM Test.food_info WHERE food_name LIKE ?");
+        $stmt = $conn->prepare("SELECT * FROM food_info WHERE food_name LIKE ?");
     }
 
     // Partial matching
