@@ -10,17 +10,23 @@ function showcnotification(type, message) {
     }, 2000);
 }
 document.addEventListener('DOMContentLoaded', function () {
+    
+    const userData = JSON.parse(localStorage.getItem('userData'));   
+// Prefill form with current user data
+ document.getElementById('loggedinusername').value = userData.username;
+
     loadSleepTrend();
 });
 
 let sleepTrendChart;
 
 function loadSleepTrend() {
+    var user_id= document.getElementById('loggedinusername').value;
     $.ajax({
         url: 'backend.php', // Your PHP function to fetch sleep data
         type: 'POST',
         dataType: 'json',
-        data: { action: 'getSleepData' },
+        data: { action: 'getSleepData',user_id:user_id},
 
         success: function (data) {
             console.log("Response from DB:", data);
@@ -137,6 +143,7 @@ $('#manualEntryForm').on('submit', function (event) {
     event.preventDefault();
     const saveButton = $('#saveButton');
     saveButton.prop('disabled', true).text('Saving...');
+    var user_id= document.getElementById('loggedinusername').value;
 
     // Gather form data
     const formData = {
@@ -145,6 +152,7 @@ $('#manualEntryForm').on('submit', function (event) {
         hours: $('#hours').val(),
         user_id: $('#user_id').val(),
         minutes: $('#minutes').val(),
+        user_id:user_id,
     };
 
     // Send the AJAX request
@@ -181,11 +189,12 @@ function openDiaryModalNew() {
 }
 
 function loadDiaryEntries() {
+    var user_id= document.getElementById('loggedinusername').value;
     $.ajax({
         url: 'backend.php',
         type: 'POST',
         dataType: 'json',
-        data: { action: 'getSleepData' },
+        data: { action: 'getSleepData',user_id:user_id },
         success: function (data) {
             if (data.success) {
                 const entries = data.sleepData;
@@ -216,11 +225,13 @@ function loadDiaryEntries() {
 }
 ////CRUD
 function updateSleepEntry(date) {
+    var user_id= document.getElementById('loggedinusername').value;
     const formData = {
         action: 'update_sleep_entry', // Define this action in PHP
         date: $('#date').val(),
         hours: $('#hours').val(),
         minutes: $('#minutes').val(),
+        user_id:user_id,
     };
 
     $.ajax({
@@ -244,9 +255,11 @@ function updateSleepEntry(date) {
 }
 
 function deleteSleepEntry(date) {
+    var user_id= document.getElementById('loggedinusername').value;
     const formData = {
         action: 'delete_sleep_entry', // Define this action in PHP
-        date: date
+        date: date,
+        user_id:user_id,
     };
 
     $.ajax({
@@ -347,6 +360,8 @@ function updateTimerDisplay() {
 }
 
 function saveTimerEntry(date, hours, minutes) {
+
+    var user_id= document.getElementById('loggedinusername').value;
     const saveButton = $('#saveButton');
     saveButton.prop('disabled', true).text('Saving...');
 
@@ -356,6 +371,7 @@ function saveTimerEntry(date, hours, minutes) {
         date: date,
         hours: hours,
         minutes: minutes,
+        user_id:user_id,
     };
 
     // Send the AJAX request

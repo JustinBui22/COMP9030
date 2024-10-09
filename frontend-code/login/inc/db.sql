@@ -49,3 +49,52 @@ VALUES
 ('John Doe', 'Male', 32, 180, 75, 'Active', 'Group A', 1, '../../common/assets/images/patient_icon.png'),
 ('Jane Smith', 'Female', 28, 165, 60, 'Inactive', 'Group B', 1, '../../common/assets/images/patient_icon.png'),
 ('Bob Brown', 'Male', 45, 175, 85, 'Active', 'Group A', 1, '../../common/assets/images/patient_icon.png');
+
+
+
+CREATE TABLE `sleep_diary` (
+  `id` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `hours` int(11) NOT NULL,
+  `minutes` int(11) NOT NULL,
+  `user_id` varchar(20) NOT NULL
+);
+--
+-- Dumping data for table `sleep_diary`
+--
+
+INSERT INTO `sleep_diary` (`id`, `date`, `hours`, `minutes`, `user_id`) VALUES
+(1, '2024-10-01', 10, 3, ''),
+(2, '2024-10-02', 3, 30, ''),
+(5, '2024-10-08', 9, 12, ''),
+(6, '2024-10-07', 6, 48, ''),
+(9, '2024-10-03', 12, 45, '');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `sleep_diary`
+--
+ALTER TABLE `sleep_diary`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `sleep_diary`
+--
+ALTER TABLE `sleep_diary`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+COMMIT;
+
+
+
+
+
+
+
+

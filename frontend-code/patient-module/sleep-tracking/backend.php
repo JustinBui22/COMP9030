@@ -2,7 +2,7 @@
 
 
 header('Content-Type: application/json');
-$pdo = new PDO('mysql:host=localhost;dbname=comp9030', 'root', '');
+$conn = new PDO('mysql:host=localhost;dbname=comp9030', 'root', '');
 
 
 // Check if the request is POST and the action parameter is set
@@ -44,14 +44,15 @@ function saveSleepEntry($conn)
 		$date = $_POST['date'];
 		$hours = $_POST['hours'];
 		$minutes = $_POST['minutes'];
+		$user_id=$_POST['user_id'];
 
 
 
 		// Validate the inputs
 		if (!empty($date) && is_numeric($hours) && is_numeric($minutes)) {
 			// Check if the date already exists
-			$stmt = $conn->prepare("SELECT COUNT(*) FROM sleep_diary WHERE date = ?");
-			$stmt->execute([$date]);
+			$stmt = $conn->prepare("SELECT COUNT(*) FROM sleep_diary WHERE date = ? and user_id=?");
+			$stmt->execute([$date,$user_id]);
 			$count = $stmt->fetchColumn();
 
 			if ($count > 0) {
@@ -60,8 +61,8 @@ function saveSleepEntry($conn)
 			}
 
 			// Insert new entry
-			$stmt = $conn->prepare("INSERT INTO sleep_diary (date, hours, minutes) VALUES (?, ?, ?)");
-			$result = $stmt->execute([$date, $hours, $minutes]);
+			$stmt = $conn->prepare("INSERT INTO sleep_diary (date, hours, minutes,user_id) VALUES (?, ?,?, ?)");
+			$result = $stmt->execute([$date, $hours, $minutes,$user_id]);
 
 			if ($result) {
 				echo json_encode(['success' => true, 'message' => 'Sleep entry saved']);
@@ -83,10 +84,17 @@ function getSleepData($conn)
 {
 	header('Content-Type: application/json');
 	try {
-		// Query to retrieve the sleep data
-		$stmt = $conn->prepare("SELECT date, hours, minutes FROM sleep_diary ORDER BY date ASC");
-		$stmt->execute();
-		$sleepData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$user_id = $_POST['user_id'];
+
+
+$stmt = $conn->prepare("SELECT date, hours, minutes FROM sleep_diary WHERE user_id = ? ORDER BY date ASC");
+
+// Execute the statement
+$stmt->execute([$user_id]);
+
+// Fetch all the sleep data
+$sleepData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 
 		// Calculate the total hours and minutes from sleep data
 		$totalHours = 0;
@@ -125,12 +133,13 @@ function updateSleepEntry($conn)
 		$date = $_POST['date'];
 		$hours = $_POST['hours'];
 		$minutes = $_POST['minutes'];
+		$user_id= $_POST['user_id'];
 
 		// Validate the inputs
 		if (!empty($date) && is_numeric($hours) && is_numeric($minutes)) {
 			// Update entry
-			$stmt = $conn->prepare("UPDATE sleep_diary SET hours = ?, minutes = ? WHERE date = ?");
-			$result = $stmt->execute([$hours, $minutes, $date]);
+			$stmt = $conn->prepare("UPDATE sleep_diary SET hours = ?, minutes = ? WHERE date = ? and user_id=?");
+			$result = $stmt->execute([$hours, $minutes, $date,$user_id]);
 
 			if ($result) {
 				echo json_encode(['success' => true, 'message' => 'Sleep entry updated']);
@@ -151,12 +160,13 @@ function deleteSleepEntry($conn)
 {
 	try {
 		$date = $_POST['date'];
+		$user_id= $_POST['user_id'];
 
 		// Validate the input
 		if (!empty($date)) {
 			// Delete entry
-			$stmt = $conn->prepare("DELETE FROM sleep_diary WHERE date = ?");
-			$result = $stmt->execute([$date]);
+			$stmt = $conn->prepare("DELETE FROM sleep_diary WHERE date = ? and user_id=?");
+			$result = $stmt->execute([$date,$user_id]);
 
 			if ($result) {
 				echo json_encode(['success' => true, 'message' => 'Sleep entry deleted']);
