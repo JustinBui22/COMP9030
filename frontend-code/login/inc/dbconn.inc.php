@@ -1,9 +1,9 @@
 <?php
 
-define("DB_HOST", "database-9030.cho2aisawwwl.ap-southeast-2.rds.amazonaws.com");
+define("DB_HOST", "localhost");
 define("DB_NAME", "COMP9030");
-define("DB_USER", "admin");
-define("DB_PASS", "Test1234!");
+define("DB_USER", "dbadmin");
+define("DB_PASS", "");
 
 $conn = @mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 if (!$conn) {
